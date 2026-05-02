@@ -3,8 +3,9 @@ import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = new URL('..', import.meta.url).pathname.replace(/^\//, '');
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SOURCE = join(ROOT, 'books', 'think-like-a-commoner.md');
 const DATA_DIR = join(ROOT, 'src', 'data');
 const CACHE_DIR = join(ROOT, '.extraction-cache');
@@ -340,7 +341,10 @@ async function extractOstromTargeted(chunks: { chapterLabel: string; text: strin
 
   const ch1 = chunks.find(c => /rediscovery of the commons/i.test(c.chapterLabel));
   const ch2 = chunks.find(c => /tragedy/i.test(c.chapterLabel));
-  const combinedText = [ch1?.text ?? '', ch2?.text ?? ''].join('\n\n---\n\n');
+  if (!ch1 || !ch2) {
+    throw new Error(`Ostrom targeted extraction needs Ch.1 + Ch.2; matched: ch1=${!!ch1} ch2=${!!ch2}. Available labels: ${chunks.map(c => c.chapterLabel).join(' | ')}`);
+  }
+  const combinedText = [ch1.text, ch2.text].join('\n\n---\n\n');
 
   const userContent = `CHAPTERS: Ch. 1 (The Rediscovery of the Commons) and Ch. 2 (The Tyranny of the "Tragedy" Myth)
 
