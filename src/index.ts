@@ -277,6 +277,134 @@ function createServer(): McpServer {
     return { content: [{ type: 'text' as const, text: JSON.stringify(strategies, null, 2) }] };
   });
 
+  // === DESIGN TOOLS (3) ===
+
+  server.registerTool('assess_ostrom_principles', {
+    title: 'Assess Against Ostrom\'s 8 Design Principles',
+    description: 'Returns all 8 of Ostrom\'s design principles with diagnostic questions, formatted as a fillable rubric. The agent walks through the questions with the user.',
+    inputSchema: {
+      commons_description: z.string().optional().describe('Optional 1-3 paragraph description of the commons being assessed. If provided, surfaces examples that resemble it.'),
+    },
+  }, async ({ commons_description }) => {
+    const examples_by_principle: Record<number, string[]> = {};
+    for (const p of OSTROM_PRINCIPLES) {
+      examples_by_principle[p.number] = p.example_commons_ids
+        .map(id => COMMONS.find(c => c.id === id))
+        .filter(Boolean)
+        .map(c => `${c!.id} (${c!.name})`);
+    }
+
+    return {
+      content: [{ type: 'text' as const, text: JSON.stringify({
+        instructions: 'Walk through each of Ostrom\'s 8 design principles below with the user. For each, ask the diagnostic_questions and record whether the commons embodies, partially embodies, or lacks the principle. At the end, summarize gaps.',
+        principles: OSTROM_PRINCIPLES.map(p => ({
+          number: p.number,
+          name: p.name,
+          description: p.description,
+          diagnostic_questions: p.diagnostic_questions,
+          example_commons_in_book: examples_by_principle[p.number],
+        })),
+        commons_description_received: commons_description ?? '(none)',
+      }, null, 2) }],
+    };
+  });
+
+  server.registerTool('find_similar_commons', {
+    title: 'Find Similar Commons (and Their Protocols)',
+    description: 'Like find_precedent_commons but framed for design — returns commons in the same domain along with the protocols they use, to learn from.',
+    inputSchema: {
+      domain: z.string().describe('Domain (land, water, food/seed, knowledge/digital, social/mutual_aid, urban, money/finance, labor, energy, cultural).'),
+      what_stewarded: z.string().describe('What the commons stewards.'),
+      scale: z.string().optional().describe('Scale hint: village, regional, networked-digital, planetary.'),
+    },
+  }, async ({ domain, what_stewarded, scale }) => {
+    const dKey = domain.toLowerCase();
+    const wKey = what_stewarded.toLowerCase();
+    const scored = COMMONS.map(c => {
+      let score = 0;
+      if (c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase())) score += 3;
+      const blob = `${c.brief} ${c.care_wealth}`.toLowerCase();
+      for (const word of wKey.split(/\s+/).filter(w => w.length > 3)) {
+        if (blob.includes(word)) score += 2;
+      }
+      if (scale) {
+        if (`${c.brief} ${c.community}`.toLowerCase().includes(scale.toLowerCase())) score += 1;
+      }
+      return { c, score };
+    }).filter(s => s.score > 0).sort((a, b) => b.score - a.score);
+
+    const top = scored.slice(0, 5).map(s => ({
+      id: s.c.id,
+      name: s.c.name,
+      domain: s.c.domain,
+      brief: s.c.brief,
+      community: s.c.community,
+      protocols: s.c.protocols,
+      source_chapter: s.c.source_chapter,
+    }));
+
+    if (top.length === 0) {
+      return { content: [{ type: 'text' as const, text: `No matches. Available domains: ${[...new Set(COMMONS.map(c => c.domain))].join(', ')}` }] };
+    }
+    return { content: [{ type: 'text' as const, text: JSON.stringify(top, null, 2) }] };
+  });
+
+  server.registerTool('suggest_commoning_protocols', {
+    title: 'Suggest Commoning Protocols',
+    description: 'Surface protocol patterns (boundary, monitoring, sanctions, conflict-resolution, polycentric layering) by category, with case examples from Bollier.',
+    inputSchema: {
+      domain: z.string().describe('Domain hint.'),
+      problems: z.array(z.string()).optional().describe('Specific problems you\'re trying to solve (e.g., "free riders", "cross-scale coordination").'),
+    },
+  }, async ({ domain, problems }) => {
+    const dKey = domain.toLowerCase();
+    const matchingCommons = COMMONS.filter(c => c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase()));
+
+    // Group protocols by simple keyword categorization
+    const categories: Record<string, { protocol: string; commons_id: string; commons_name: string }[]> = {
+      boundary: [],
+      monitoring_and_sanctions: [],
+      conflict_resolution: [],
+      polycentric_or_nested: [],
+      other: [],
+    };
+
+    const categorize = (proto: string): keyof typeof categories => {
+      const p = proto.toLowerCase();
+      if (/(boundar|member|access|entitle|outsider)/.test(p)) return 'boundary';
+      if (/(monitor|sanction|punish|enforce|fine|expel)/.test(p)) return 'monitoring_and_sanctions';
+      if (/(dispute|resolv|conflict|mediat|arbitra)/.test(p)) return 'conflict_resolution';
+      if (/(layer|nest|federat|polycen|coordinat across)/.test(p)) return 'polycentric_or_nested';
+      return 'other';
+    };
+
+    for (const c of matchingCommons) {
+      for (const p of c.protocols) {
+        const cat = categorize(p);
+        categories[cat].push({ protocol: p, commons_id: c.id, commons_name: c.name });
+      }
+    }
+
+    // If problems mentioned free-riding etc., bias toward sanctions
+    let highlight: string | null = null;
+    if (problems && problems.some(pr => /(free.?rid|shirk|cheat|defect)/.test(pr.toLowerCase()))) {
+      highlight = 'monitoring_and_sanctions';
+    }
+    if (problems && problems.some(pr => /(scale|cross.?scale|regional|coordinat)/.test(pr.toLowerCase()))) {
+      highlight = 'polycentric_or_nested';
+    }
+
+    return {
+      content: [{ type: 'text' as const, text: JSON.stringify({
+        domain,
+        problems_received: problems ?? [],
+        highlighted_category: highlight,
+        protocols_by_category: categories,
+        note: 'Protocols are extracted from real commons in Bollier\'s book. Adapt them — Bollier (Ch. 1) emphasizes that commons are like DNA: under-specified so they can adapt to local conditions.',
+      }, null, 2) }],
+    };
+  });
+
   return server;
 }
 
