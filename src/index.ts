@@ -127,6 +127,156 @@ function createServer(): McpServer {
     };
   });
 
+  // === DIAGNOSTIC TOOLS (4) ===
+
+  server.registerTool('classify_situation', {
+    title: 'Classify a situation against Bollier\'s framing',
+    description: 'Given a description of a situation, classify it as commons / enclosure / open_access / market_state_capture and explain the reasoning. Heuristic, not a definitive judgment — see Bollier Ch. 2 on Hardin\'s confusion of open access with commons.',
+    inputSchema: {
+      description: z.string().describe('1-3 paragraph description of the situation.'),
+    },
+  }, async ({ description }) => {
+    const d = description.toLowerCase();
+    let classification: 'commons' | 'enclosure' | 'open_access' | 'market_state_capture' = 'open_access';
+    const reasons: string[] = [];
+
+    const hasCommunity = /(community|stewards|members|cooperative|tribe|village|crew|guild|peer)/.test(d);
+    const hasProtocols = /(rule|protocol|norm|sanction|boundary|membership|governance)/.test(d);
+    const hasEnclosure = /(privatiz|financiali|land grab|enclos|commodif|monetiz|patent|copyright|enclose)/.test(d);
+    const hasState = /(government|state|legislat|regulat)/.test(d);
+    const hasMarket = /(corporat|investor|market|profit|capital)/.test(d);
+
+    if (hasEnclosure && hasMarket && hasState) {
+      classification = 'market_state_capture';
+      reasons.push('State authority and market actors are jointly converting shared wealth into private property — Bollier\'s "market/state duopoly" pattern (Ch. 2, Ch. 4).');
+    } else if (hasEnclosure) {
+      classification = 'enclosure';
+      reasons.push('Conversion of shared / customary wealth into private property is described — see Ch. 3 (enclosures of nature) and Ch. 4 (cultural / digital enclosure).');
+    } else if (hasCommunity && hasProtocols) {
+      classification = 'commons';
+      reasons.push('Community + care-wealth + social protocols all present — Bollier\'s "commons = community + defined body of shared wealth + set of social protocols" (Ch. 1).');
+    } else if (hasCommunity || hasProtocols) {
+      classification = 'open_access';
+      reasons.push('Either community or protocols are missing. This is the open-access regime Hardin mistook for a commons (Ch. 2). A genuine commons MUST have both.');
+    } else {
+      classification = 'open_access';
+      reasons.push('No community, no protocols, no enclosure pattern detected — best read as open-access pending more information.');
+    }
+
+    return {
+      content: [{ type: 'text' as const, text: JSON.stringify({
+        classification,
+        reasoning: reasons.join(' '),
+        caveat: 'Heuristic match against Bollier\'s framing, not a definitive judgment. See Ch. 2: a commons MUST have boundaries, rules, social norms, and sanctions against free riders. Open-access is "no-man\'s-land".',
+        next_tool_hint: classification === 'enclosure' || classification === 'market_state_capture'
+          ? 'Try find_enclosure_pattern to match the specific dynamics, then list_response_strategies.'
+          : classification === 'commons'
+          ? 'Try assess_ostrom_principles to walk through governance, or find_similar_commons for protocol ideas.'
+          : 'Try start_analysis with situation="exploring" to gather more detail.',
+      }, null, 2) }],
+    };
+  });
+
+  server.registerTool('find_enclosure_pattern', {
+    title: 'Find Enclosure Patterns',
+    description: 'Match a situation to one or more named enclosure patterns from Bollier\'s catalog. Returns up to 3 patterns with signatures and canonical examples.',
+    inputSchema: {
+      domain: z.string().optional().describe('Domain hint (land, water, food/seed, knowledge/digital, urban, money/finance, etc.)'),
+      signs: z.array(z.string()).optional().describe('Observed signs / dynamics, free text.'),
+    },
+  }, async ({ domain, signs }) => {
+    const signsBlob = (signs ?? []).join(' ').toLowerCase();
+    const domainKey = (domain ?? '').toLowerCase();
+
+    const scored = ENCLOSURES.map(e => {
+      let score = 0;
+      if (domainKey && e.domain_examples) {
+        for (const dKey of Object.keys(e.domain_examples)) {
+          if (dKey.toLowerCase().includes(domainKey) || domainKey.includes(dKey.toLowerCase())) score += 3;
+        }
+      }
+      if (signsBlob) {
+        const haystack = `${e.name} ${e.signature} ${e.example}`.toLowerCase();
+        for (const word of signsBlob.split(/\s+/).filter(w => w.length > 3)) {
+          if (haystack.includes(word)) score += 1;
+        }
+      }
+      return { e, score };
+    }).sort((a, b) => b.score - a.score);
+
+    const top = scored.filter(s => s.score > 0).slice(0, 3).map(s => s.e);
+    if (top.length === 0) {
+      const list = ENCLOSURES.map(e => `  ${e.id} — ${e.name}`).join('\n');
+      return { content: [{ type: 'text' as const, text: `No clear match. Available enclosure patterns:\n${list}` }] };
+    }
+    return { content: [{ type: 'text' as const, text: JSON.stringify(top, null, 2) }] };
+  });
+
+  server.registerTool('find_precedent_commons', {
+    title: 'Find Precedent Commons',
+    description: 'Surface 3-5 commons cases from Bollier that resemble a situation, by domain and what is being stewarded.',
+    inputSchema: {
+      domain: z.string().describe('Domain (land, water, food/seed, knowledge/digital, etc.)'),
+      scale: z.string().optional().describe('Scale hint: village, regional, networked-digital, planetary.'),
+      what_stewarded: z.string().optional().describe('What the commons stewards (e.g., "fishing rights", "open-source code", "irrigation water").'),
+    },
+  }, async ({ domain, scale, what_stewarded }) => {
+    const dKey = domain.toLowerCase();
+    const candidates = COMMONS.filter(c =>
+      c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase())
+    );
+
+    const scored = candidates.map(c => {
+      let score = 1; // domain match
+      if (what_stewarded) {
+        const blob = `${c.brief} ${c.care_wealth}`.toLowerCase();
+        for (const word of what_stewarded.toLowerCase().split(/\s+/).filter(w => w.length > 3)) {
+          if (blob.includes(word)) score += 2;
+        }
+      }
+      if (scale) {
+        const blob = `${c.brief} ${c.community}`.toLowerCase();
+        if (blob.includes(scale.toLowerCase())) score += 1;
+      }
+      return { c, score };
+    }).sort((a, b) => b.score - a.score);
+
+    const top = scored.slice(0, 5).map(s => s.c);
+    if (top.length === 0) {
+      return { content: [{ type: 'text' as const, text: `No commons in domain "${domain}". Available domains: ${[...new Set(COMMONS.map(c => c.domain))].join(', ')}` }] };
+    }
+    return { content: [{ type: 'text' as const, text: JSON.stringify(top, null, 2) }] };
+  });
+
+  server.registerTool('list_response_strategies', {
+    title: 'List Response Strategies',
+    description: 'Surface commoning strategies (parallel polis, federation, decommodification, vernacular law, etc.) that respond to a given enclosure or operate in a given domain.',
+    inputSchema: {
+      enclosure_id: z.string().optional().describe('Specific enclosure ID to find counters for.'),
+      domain: z.string().optional().describe('Domain hint.'),
+    },
+  }, async ({ enclosure_id, domain }) => {
+    let strategies = STRATEGIES;
+    if (enclosure_id) {
+      strategies = strategies.filter(s => s.problem_enclosure_ids.includes(enclosure_id));
+      if (strategies.length === 0) {
+        const ids = STRATEGIES.flatMap(s => s.problem_enclosure_ids);
+        return { content: [{ type: 'text' as const, text: `No strategies tagged for "${enclosure_id}". Tagged enclosure IDs across all strategies: ${[...new Set(ids)].join(', ')}` }] };
+      }
+    }
+    if (domain) {
+      const dKey = domain.toLowerCase();
+      strategies = strategies.filter(s => {
+        const exampleCommons = s.example_commons_ids.map(id => COMMONS.find(c => c.id === id)).filter(Boolean);
+        return exampleCommons.some(c => c!.domain.toLowerCase().includes(dKey));
+      });
+    }
+    if (strategies.length === 0) {
+      return { content: [{ type: 'text' as const, text: 'No matching strategies. Use list_all (planned) or call without filters to see all.' }] };
+    }
+    return { content: [{ type: 'text' as const, text: JSON.stringify(strategies, null, 2) }] };
+  });
+
   return server;
 }
 
