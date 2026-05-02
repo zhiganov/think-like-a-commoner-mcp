@@ -492,7 +492,48 @@ function createServer(): McpServer {
   return server;
 }
 
-// === START SERVER (stdio for now; HTTP added in Task 9) ===
+// === START SERVER (dual stdio / HTTP) ===
+
+async function startHttpServer() {
+  const app = express();
+  app.use(express.json());
+
+  app.get('/health', (_req, res) => {
+    res.json({ status: 'ok', name: 'think-like-a-commoner', version: '0.1.0' });
+  });
+
+  const sessions = new Map<string, StreamableHTTPServerTransport>();
+
+  app.all('/mcp', async (req, res) => {
+    const existingSessionId = req.headers['mcp-session-id'] as string | undefined;
+
+    if (existingSessionId && sessions.has(existingSessionId)) {
+      const transport = sessions.get(existingSessionId)!;
+      await transport.handleRequest(req, res, req.body);
+      return;
+    }
+
+    const transport = new StreamableHTTPServerTransport({
+      sessionIdGenerator: () => crypto.randomUUID(),
+    });
+    const sessionServer = createServer();
+    await sessionServer.connect(transport);
+
+    await transport.handleRequest(req, res, req.body);
+
+    const newSessionId = res.getHeader('mcp-session-id') as string | undefined;
+    if (newSessionId) {
+      sessions.set(newSessionId, transport);
+      transport.onclose = () => sessions.delete(newSessionId);
+    }
+  });
+
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.error(`Think Like a Commoner MCP Server running on HTTP port ${port}`);
+  });
+}
+
 async function startStdioServer() {
   const server = createServer();
   const transport = new StdioServerTransport();
@@ -500,7 +541,8 @@ async function startStdioServer() {
   console.error('Think Like a Commoner MCP Server running on stdio');
 }
 
-startStdioServer().catch((error) => {
+const isHttp = !!process.env.PORT;
+(isHttp ? startHttpServer() : startStdioServer()).catch((error) => {
   console.error('Fatal error:', error);
   process.exit(1);
 });
