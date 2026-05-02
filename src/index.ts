@@ -405,6 +405,90 @@ function createServer(): McpServer {
     };
   });
 
+  // === REFERENCE TOOLS (3) ===
+
+  server.registerTool('apply_ontoshift', {
+    title: 'Apply OntoShift (Market-mind → Commoning-mind reframe)',
+    description: 'Given a market/state-mind framing of a problem, return the commoning-mind reframe with a grounding Bollier passage. The OntoShift is one of Bollier\'s central moves.',
+    inputSchema: {
+      market_framing: z.string().describe('A market/state-mind framing of a problem. E.g., "the tragedy of the commons", "we need to monetize this resource".'),
+    },
+  }, async ({ market_framing }) => {
+    const m = market_framing.toLowerCase();
+
+    // Find a relevant quote
+    const candidateQuotes = QUOTES.filter(q => {
+      const blob = `${q.text} ${q.themes.join(' ')}`.toLowerCase();
+      return q.themes.some(t => /(ontoshift|tragedy|relational|commoning|reframe)/.test(t.toLowerCase()))
+        || /(commoning|relational|ontoshift)/.test(blob);
+    }).slice(0, 1);
+
+    // Heuristic reframes (extend over time as glossary grows)
+    let reframe = '';
+    if (/(tragedy of the commons|tragedy)/.test(m)) {
+      reframe = `Bollier (Ch. 2) reframes "tragedy of the commons" as a misnomer: Hardin described an open-access regime, not a commons. A commons MUST have boundaries, rules, social norms, and sanctions. The real tragedy is the *tragedy of the market* — heedless individual maximization indifferent to collective good. Commoning replaces "rational actor" with "another version of me," collapsing the collective-action problem.`;
+    } else if (/(monetiz|commodif|sell|price|market)/.test(m)) {
+      reframe = `Bollier (Ch. 3-4) reframes pricing/monetization as enclosure: it strips care-wealth from its relational context and converts it to inert commodity. The commoning-mind alternative: treat the resource as a *social organism* — community + care-wealth + protocols — and design protocols that decommodify it (land trust, peer-production, gift economy, polycentric stewardship).`;
+    } else if (/(individual|self.?interest|rational)/.test(m)) {
+      reframe = `Bollier (Ch. 7) reframes individualism as an unexamined inheritance from market culture. The commoning-mind alternative is *relational* — selves are entangled and intraconnected. Collective action is not difficult or improbable when commoners see each other as "another version of me" rather than as isolated rational utility-maximizers.`;
+    } else if (/(efficien|optim|growth|progress)/.test(m)) {
+      reframe = `Bollier (Ch. 4, conclusion) reframes growth/efficiency/progress as the cover story for enclosure. The commoning-mind alternative: sufficiency and care, "islands of coherence" outside the market/state system — not anti-modern, but post-extractivist.`;
+    } else {
+      reframe = `No specific reframe heuristic matched. General OntoShift: from market-mind (resource, transaction, individual, scarcity, growth) → to commoning-mind (care-wealth, protocol, relational entanglement, sufficiency, regeneration). See Ch. 7 ("The Commons as a Relational Organism").`;
+    }
+
+    return {
+      content: [{ type: 'text' as const, text: JSON.stringify({
+        market_framing,
+        commoning_reframe: reframe,
+        grounding_quote: candidateQuotes[0] ?? null,
+      }, null, 2) }],
+    };
+  });
+
+  server.registerTool('get_glossary_term', {
+    title: 'Get Glossary Term',
+    description: 'Look up a Bollier vocabulary term: commoning, Commonsverse, care-wealth, vernacular law, parallel polis, OntoShift, peer production, polycentric governance, etc.',
+    inputSchema: {
+      term: z.string().describe('The term to look up.'),
+    },
+  }, async ({ term }) => {
+    const tKey = term.toLowerCase().trim();
+    const exact = GLOSSARY.find(g => g.term.toLowerCase() === tKey);
+    if (exact) {
+      return { content: [{ type: 'text' as const, text: JSON.stringify(exact, null, 2) }] };
+    }
+    const partial = GLOSSARY.filter(g => g.term.toLowerCase().includes(tKey) || tKey.includes(g.term.toLowerCase()));
+    if (partial.length > 0) {
+      return { content: [{ type: 'text' as const, text: JSON.stringify({ note: `No exact match for "${term}". Closest:`, matches: partial }, null, 2) }] };
+    }
+    const list = GLOSSARY.map(g => g.term).join(', ');
+    return { content: [{ type: 'text' as const, text: `Term "${term}" not found. Available: ${list}` }] };
+  });
+
+  server.registerTool('find_quote', {
+    title: 'Find a Bollier Quote on a Theme',
+    description: 'Returns up to 3 verbatim Bollier passages on a theme. For citation in writeups. Each result includes attribution.',
+    inputSchema: {
+      theme: z.string().describe('Theme keyword (e.g., "enclosure", "financialization", "OntoShift", "tragedy", "commoning").'),
+      max_results: z.number().optional().describe('Max results (default 3, hard cap 3 for fair-use discipline).'),
+    },
+  }, async ({ theme, max_results }) => {
+    const cap = Math.min(max_results ?? 3, 3);
+    const tKey = theme.toLowerCase();
+    const matches = QUOTES.filter(q =>
+      q.themes.some(t => t.toLowerCase().includes(tKey) || tKey.includes(t.toLowerCase()))
+      || q.text.toLowerCase().includes(tKey)
+    ).slice(0, cap);
+
+    if (matches.length === 0) {
+      const themes = [...new Set(QUOTES.flatMap(q => q.themes))].sort();
+      return { content: [{ type: 'text' as const, text: `No quotes on theme "${theme}". Available themes: ${themes.join(', ')}` }] };
+    }
+    const attribution_note = 'Each quote is from Bollier, *Think Like a Commoner* 2nd ed. (2024), CC BY-NC-SA 4.0. Cite full attribution per `source_attribution` field. https://thinklikeacommoner.com/second-edition/';
+    return { content: [{ type: 'text' as const, text: JSON.stringify({ matches, attribution_note }, null, 2) }] };
+  });
+
   return server;
 }
 
