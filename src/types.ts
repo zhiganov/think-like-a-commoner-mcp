@@ -29,6 +29,16 @@ export interface Commons {
   // Heavy upgrade only (#16): ostrom_principles_present?: number[];
 }
 
+// Catalog convention: anti-pattern entries are tagged via id suffix.
+// `-anti-pattern` / `-antipattern` are explicit cautionary entries.
+// `-anticommons` covers Heller-style "tragedy of the anti-commons" cases.
+// Bollier surfaces these as warnings, not exemplars — exclude them from
+// precedent / similar-commons surfaces, but keep them in the underlying catalog
+// (search.ts and protocol mining still benefit from their MUST NOT rules).
+export function isAntiPattern(c: Commons): boolean {
+  return /-anti-?pattern$|-anticommons$/.test(c.id);
+}
+
 export interface Enclosure {
   id: string;
   name: string;

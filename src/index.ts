@@ -11,6 +11,7 @@ import {
   COMMONS, ENCLOSURES, STRATEGIES,
   OSTROM_PRINCIPLES, GLOSSARY, QUOTES,
 } from './data/index.js';
+import { isAntiPattern } from './types.js';
 
 function createServer(): McpServer {
   const server = new McpServer({
@@ -223,7 +224,8 @@ function createServer(): McpServer {
   }, async ({ domain, scale, what_stewarded }) => {
     const dKey = domain.toLowerCase();
     const candidates = COMMONS.filter(c =>
-      c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase())
+      !isAntiPattern(c) &&
+      (c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase()))
     );
 
     const scored = candidates.map(c => {
@@ -320,7 +322,7 @@ function createServer(): McpServer {
   }, async ({ domain, what_stewarded, scale }) => {
     const dKey = domain.toLowerCase();
     const wKey = what_stewarded.toLowerCase();
-    const scored = COMMONS.map(c => {
+    const scored = COMMONS.filter(c => !isAntiPattern(c)).map(c => {
       let score = 0;
       if (c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase())) score += 3;
       const blob = `${c.brief} ${c.care_wealth}`.toLowerCase();
@@ -355,10 +357,12 @@ function createServer(): McpServer {
     inputSchema: {
       domain: z.string().describe('Domain hint.'),
       problems: z.array(z.string()).optional().describe('Specific problems you\'re trying to solve (e.g., "free riders", "cross-scale coordination").'),
+      max_per_category: z.number().int().min(1).max(10).optional().describe('Max protocols per category (default 4, hard cap 10). Lower values keep responses small.'),
     },
-  }, async ({ domain, problems }) => {
+  }, async ({ domain, problems, max_per_category }) => {
     const dKey = domain.toLowerCase();
     const matchingCommons = COMMONS.filter(c => c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase()));
+    const cap = Math.min(max_per_category ?? 4, 10);
 
     // Group protocols by simple keyword categorization
     const categories: Record<string, { protocol: string; commons_id: string; commons_name: string }[]> = {
@@ -394,13 +398,25 @@ function createServer(): McpServer {
       highlight = 'polycentric_or_nested';
     }
 
+    // Cap protocols per category to keep responses tractable.
+    // Highlighted category gets 2x the cap so the focal area still has range.
+    const capped: Record<string, { protocol: string; commons_id: string; commons_name: string }[]> = {};
+    const totals: Record<string, number> = {};
+    for (const [cat, items] of Object.entries(categories)) {
+      const limit = cat === highlight ? cap * 2 : cap;
+      capped[cat] = items.slice(0, limit);
+      totals[cat] = items.length;
+    }
+
     return {
       content: [{ type: 'text' as const, text: JSON.stringify({
         domain,
         problems_received: problems ?? [],
         highlighted_category: highlight,
-        protocols_by_category: categories,
-        note: 'Protocols are extracted from real commons in Bollier\'s book. Adapt them — Bollier (Ch. 1) emphasizes that commons are like DNA: under-specified so they can adapt to local conditions.',
+        max_per_category: cap,
+        total_protocols_by_category: totals,
+        protocols_by_category: capped,
+        note: 'Protocols are extracted from real commons in Bollier\'s book. Adapt them — Bollier (Ch. 1) emphasizes that commons are like DNA: under-specified so they can adapt to local conditions. Pass max_per_category to widen or narrow the surface.',
       }, null, 2) }],
     };
   });

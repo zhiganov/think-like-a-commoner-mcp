@@ -32,7 +32,7 @@ Add to your Claude Desktop / Claude Code MCP config:
 }
 ```
 
-(Update the URL with the actual deploy URL from Railway after Task 12.)
+The Railway deploy is public, no auth, and does not require an API key.
 
 ## Use it (local)
 
