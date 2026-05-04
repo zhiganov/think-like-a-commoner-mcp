@@ -59,7 +59,7 @@ TypeScript strict ESM, `@modelcontextprotocol/sdk` v1.27+, `zod` v4, `express`. 
 
 ## Deployment
 
-Railway (public, no auth), service `think-like-a-commoner-mcp` under the **Book Power** Railway project. Live at https://think-like-a-commoner-mcp-production-f90f.up.railway.app. GitHub auto-deploy from `main` is wired via Railway's GitHub app on `zhiganov/think-like-a-commoner-mcp`.
+Railway (public, no auth), service `tlac-book-mcp` under the **Book Power** Railway project. Live at https://tlac-book-mcp-production.up.railway.app. GitHub auto-deploy from `main` is wired via Railway's GitHub app on `zhiganov/think-like-a-commoner-mcp`.
 
 ## Related
 
