@@ -21,6 +21,16 @@ function check(label, ok, detail = '') {
   check('find_precedent_commons filters anti-patterns', antiHits.length === 0, `top ids: ${ids.join(', ')}`);
 }
 
+// Issue #2: typed kind discriminator should also exclude entries the slug regex
+// cannot catch (e.g., starbucks-commodification, infrastructure-privatization)
+{
+  const res = await client.callTool({ name: 'find_similar_commons', arguments: { domain: 'urban', what_stewarded: 'public space' } });
+  const data = JSON.parse(res.content[0].text);
+  const ids = data.map(d => d.id);
+  const enclosureHits = ids.filter(id => /^starbucks-commodification|^infrastructure-privatization|-enclosure$/.test(id));
+  check('issue #2 — slug-innocent enclosures filtered (starbucks, wall-st, *-enclosure)', enclosureHits.length === 0, `top ids: ${ids.join(', ')}`);
+}
+
 // Fix #1b: find_similar_commons must NOT surface anti-patterns
 {
   const res = await client.callTool({ name: 'find_similar_commons', arguments: { domain: 'knowledge/digital', what_stewarded: 'open knowledge' } });

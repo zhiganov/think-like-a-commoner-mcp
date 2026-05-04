@@ -16,9 +16,18 @@ export const DOMAINS: Domain[] = [
   "labor", "energy", "cultural",
 ];
 
+// Discriminator for entries in the COMMONS catalog. Bollier's writing mixes
+// three kinds: actual commons (exemplars), specific enclosure cases, and
+// broader cautionary anti-patterns. Tools should filter accordingly.
+//   - 'commons'       — exemplars to learn from (Wikipedia, Spanish huerta, etc.)
+//   - 'enclosure'     — specific enclosure events/cases (Microsoft OS, MLK estate)
+//   - 'anti-pattern'  — cautionary concepts/framings (commons-washing, homo economicus)
+export type CommonsKind = 'commons' | 'enclosure' | 'anti-pattern';
+
 export interface Commons {
   id: string;
   name: string;
+  kind: CommonsKind;
   domain: Domain;
   brief: string;            // 1-2 sentence description
   community: string;        // who stewards
@@ -29,14 +38,8 @@ export interface Commons {
   // Heavy upgrade only (#16): ostrom_principles_present?: number[];
 }
 
-// Catalog convention: anti-pattern entries are tagged via id suffix.
-// `-anti-pattern` / `-antipattern` are explicit cautionary entries.
-// `-anticommons` covers Heller-style "tragedy of the anti-commons" cases.
-// Bollier surfaces these as warnings, not exemplars — exclude them from
-// precedent / similar-commons surfaces, but keep them in the underlying catalog
-// (search.ts and protocol mining still benefit from their MUST NOT rules).
-export function isAntiPattern(c: Commons): boolean {
-  return /-anti-?pattern$|-anticommons$/.test(c.id);
+export function isCommons(c: Commons): boolean {
+  return c.kind === 'commons';
 }
 
 export interface Enclosure {
