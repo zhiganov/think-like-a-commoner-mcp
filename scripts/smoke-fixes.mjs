@@ -21,6 +21,16 @@ function check(label, ok, detail = '') {
   check('find_precedent_commons filters anti-patterns', antiHits.length === 0, `top ids: ${ids.join(', ')}`);
 }
 
+// Issue #4: post-merge regression — known-duplicate slugs should not appear
+// anywhere in tool responses (they were folded into kept primaries)
+{
+  const merged = ['wikipedia-digital-knowledge-commons', 'community-land-trust-north-america', 'parallel-polis-commons', 'mutual-aid-covid-networks', 'state-trustee-commons-framework', 'gpl-creative-commons-legal-hack'];
+  const res = await client.callTool({ name: 'find_precedent_commons', arguments: { domain: 'knowledge/digital' } });
+  const ids = JSON.parse(res.content[0].text).map(d => d.id);
+  const dupHits = ids.filter(id => merged.includes(id));
+  check('issue #4 — merged-duplicate slugs absent from precedent results', dupHits.length === 0, `duplicate hits: ${dupHits.join(', ') || 'none'}`);
+}
+
 // Issue #2: typed kind discriminator should also exclude entries the slug regex
 // cannot catch (e.g., starbucks-commodification, infrastructure-privatization)
 {
