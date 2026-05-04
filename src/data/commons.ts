@@ -64,7 +64,13 @@ export const COMMONS: Commons[] = [
       "Commoners SHOULD pursue the construction of a parallel polis — self-organized institutions outside the market/state duopoly — as a strategic priority alongside enclosure resistance.",
       "Movement strategists MUST recognize that stopping enclosures alone is insufficient when state power is deeply allied with capital accumulation.",
       "Commons builders SHOULD cultivate 'islands of coherence' that demonstrate functional alternatives, not merely critique existing systems.",
-      "Advocates SHOULD connect commoning with degrowth, climate action, peer production, platform cooperativism, and racial justice as mutually reinforcing strategies."
+      "Advocates SHOULD connect commoning with degrowth, climate action, peer production, platform cooperativism, and racial justice as mutually reinforcing strategies.",
+      "MUST devise durable new institutions of commoning as a parallel polis — not merely reform existing market/state structures",
+      "MUST NOT rely solely on electing the right candidates or passing new laws — old governance systems are too corrupt and structurally anchored",
+      "Vision MUST be 'coenacted' by commoners themselves over time through active experimentation, debate, and innovation — it cannot be declared by a brilliant leader",
+      "SHOULD build commons/public partnerships that empower commoners, foster subsidiarity of control, and reconfigure state power",
+      "SHOULD develop new legal hacks, commons-friendly infrastructures, relationalized property forms, and translocal federations to normalize commoning",
+      "SHOULD build institutional structures of care — assisted perhaps by universal basic income — so that care and connection can supplant productivity-driven extraction"
     ],
     "source_chapter": "Preface",
     "source_quote": "Stopping enclosures is exceedingly difficult when state power is so deeply allied with capitalism and its fixation on capital accumulation, growth, and 'progress.' In the face of this totalizing power, many commoners see the appeal of building a parallel polis—functional 'islands of coherence' outside of the market/state system."
@@ -81,7 +87,12 @@ export const COMMONS: Commons[] = [
       "Creators MUST explicitly opt in by attaching a CC license to their work",
       "Users MUST respect the specific terms of the license chosen (e.g., attribution, non-commercial, share-alike)",
       "Works SHOULD remain shareable and not be re-enclosed through downstream proprietary claims",
-      "The license framework SHOULD be used to signal membership in a knowledge commons, not merely as a distribution tool"
+      "The license framework SHOULD be used to signal membership in a knowledge commons, not merely as a distribution tool",
+      "Works released under GPL or CC licenses MUST be shareable in perpetuity without permission or payment required",
+      "Legal hacks MUST reverse the law's default presumption of privatization, making sharing the default practice instead",
+      "Derivative works SHOULD be required to carry forward the same sharing terms (copyleft), preventing enclosure downstream",
+      "Legal hacks MUST NOT allow subsequent users to re-privatize the commons through patent or copyright claims",
+      "Legal structures SHOULD protect and stimulate collective intelligence by legally recognizing the consequences of one's activity for others and for the commons beyond the individual"
     ],
     "source_chapter": "Introduction",
     "source_quote": "billions of books, articles, images, and music made shareable via Creative Commons licenses"
@@ -98,7 +109,11 @@ export const COMMONS: Commons[] = [
       "Contributions MUST be freely licensed and not proprietary",
       "Content SHOULD be collaboratively governed through community norms and editorial consensus",
       "Knowledge MUST remain accessible to all without paywalls or subscription fees",
-      "MUST NOT allow private capture or commodification of the shared knowledge base"
+      "MUST NOT allow private capture or commodification of the shared knowledge base",
+      "Content MUST remain openly accessible and freely editable by volunteers under open licensing",
+      "Governance SHOULD be democratic and community-driven rather than corporate or state-controlled",
+      "Contributors SHOULD follow community norms of neutrality, verifiability, and collaborative editing",
+      "The platform MUST NOT be operated for profit or under investor-driven governance that subordinates community interests"
     ],
     "source_chapter": "Introduction"
   },
@@ -130,7 +145,16 @@ export const COMMONS: Commons[] = [
       "Members SHOULD commit financial support to farmers in advance, sharing economic risk",
       "Farmers SHOULD provide regular, seasonal shares of produce to members",
       "Relationships SHOULD be direct, transparent, and built on mutual trust rather than market abstraction",
-      "The arrangement SHOULD be understood as stewardship of a local food commons, not merely a consumer transaction"
+      "The arrangement SHOULD be understood as stewardship of a local food commons, not merely a consumer transaction",
+      "Members MUST purchase upfront shares before the growing season, providing farmers working capital when it is most needed",
+      "Risk MUST be shared mutually — members accept reduced or disappointing harvests without demanding refunds; farmers accept responsibility to grow and distribute honestly",
+      "The goal SHOULD be mutual aid and shared benefit, not profit maximization or market competition with other farms",
+      "Produce SHOULD be distributed directly and regularly (week by week) to maintain the community relationship between grower and eater",
+      "CSA principles MAY be extended beyond food (e.g., jazz shares, community-supported fisheries) to localize other cultural and economic goods",
+      "CSA governance SHOULD use member advance payments (relationalized finance) to reduce dependence on capitalist credit and market price volatility",
+      "MUST NOT structure CSA finance in ways that reintroduce pressure to maximize profits at the expense of ecological stewardship",
+      "Commoners SHOULD treat CSA membership as an act of co-stewardship, not merely consumer transaction",
+      "SHOULD design CSA arrangements so that shared risk between farmers and members replicates commons solidarity rather than market individualism"
     ],
     "source_chapter": "Introduction"
   },
@@ -146,23 +170,17 @@ export const COMMONS: Commons[] = [
       "Land MUST be held in trust and MUST NOT be sold on the open speculative market",
       "Resale prices SHOULD be limited to preserve affordability for future residents",
       "Governance SHOULD include meaningful participation by residents and the broader community",
-      "The trust MUST steward land for long-term community benefit, not private profit"
-    ],
-    "source_chapter": "Introduction"
-  },
-  {
-    "id": "blood-donation-gift-economy",
-    "kind": "commons",
-    "name": "Blood Donation Gift Economy",
-    "domain": "social/mutual_aid",
-    "brief": "Voluntary blood donation systems that operate as a gift economy, sustaining a medical commons outside market exchange.",
-    "community": "Voluntary donors and recipients within healthcare systems",
-    "care_wealth": "Human blood supply as a shared biological and social resource",
-    "protocols": [
-      "Donation MUST be voluntary and not monetarily compensated, to preserve the gift ethic",
-      "The resource SHOULD be distributed on the basis of medical need, not ability to pay",
-      "MUST NOT allow commodification or privatization of the donated blood supply",
-      "Social norms of reciprocity and solidarity SHOULD sustain participation without market incentives"
+      "The trust MUST steward land for long-term community benefit, not private profit",
+      "Land MUST be held off the market in perpetuity — it cannot be sold or allowed to appreciate as private speculative property",
+      "Governance MUST be democratic and regionally based, accountable to community members rather than investors",
+      "Residents and farmers SHOULD own and improve buildings on CLT land and recover value from improvements, but MUST NOT own the underlying land or capture market appreciation of it",
+      "CLTs SHOULD be used as vehicles for reparations and wealth-rebuilding for Black and Indigenous communities whose land was historically stolen",
+      "Land SHOULD be made accessible to younger and lower-income farmers through long-term leases rather than sales",
+      "Land trust governance MUST keep care-wealth inalienable from speculative market circuits through legal trust structures",
+      "Commoners SHOULD pool funds via relationalized finance (transvestment from capitalist circuits) rather than relying solely on conventional debt or equity",
+      "MUST NOT allow outside investors to reappropriate land held in trust for community benefit",
+      "Land trusts SHOULD function as 'private property on the outside, commons on the inside' — combining legal property forms with commons governance",
+      "Governance MUST prioritize use value and long-term community stewardship over exchange value and short-term market returns"
     ],
     "source_chapter": "Introduction"
   },
@@ -178,7 +196,16 @@ export const COMMONS: Commons[] = [
       "Participation SHOULD be voluntary and based on reciprocity rather than contractual obligation",
       "Resources SHOULD be distributed according to need, not market price",
       "Networks SHOULD be self-organized and governed by participants rather than external authorities",
-      "MUST NOT reproduce hierarchies of charity; relationships SHOULD be horizontal and dignifying"
+      "MUST NOT reproduce hierarchies of charity; relationships SHOULD be horizontal and dignifying",
+      "Mutual aid MUST be decentralized and reciprocal — participants make sure everyone gets what they need so everyone is invested in each other's well-being",
+      "Exchange MUST NOT be tit-for-tat; it is an interchange of care that builds redundancy and resilience, not strict accounting",
+      "Peer-organized mobilization SHOULD be the default when states and markets prove too rigid to respond",
+      "Networks MUST preemptively protect their social practices and ethical culture from attempted enclosures",
+      "Mutual aid SHOULD arise organically from community initiative, without requiring institutional authorization",
+      "Aid MUST be directed to those most vulnerable — the elderly, sick, and shut-ins — as a community priority",
+      "Networks SHOULD remain volunteer-driven and reciprocal, not transactional or means-tested",
+      "Mutual aid systems SHOULD be built as durable ongoing infrastructure, not only activated in emergencies",
+      "The commons SHOULD take multiple forms: social services, emergency response, health care, and life insurance, depending on community need"
     ],
     "source_chapter": "Introduction"
   },
@@ -215,22 +242,6 @@ export const COMMONS: Commons[] = [
     "source_chapter": "Introduction"
   },
   {
-    "id": "alternative-local-currencies",
-    "kind": "commons",
-    "name": "Alternative Local Currencies",
-    "domain": "money/finance",
-    "brief": "Community-issued currencies that circulate within a local economy, building economic resilience and a financial commons outside the banking system.",
-    "community": "Local businesses, residents, and community currency organizers",
-    "care_wealth": "Local economic circulation, community wealth, and mutual credit relationships",
-    "protocols": [
-      "Currency SHOULD be issued and governed by the community it serves, not external financial institutions",
-      "Circulation MUST be kept local to reinforce community economic bonds",
-      "Governance SHOULD be transparent and participatory",
-      "MUST NOT be captured by speculative financial interests or converted into instruments of extraction"
-    ],
-    "source_chapter": "Introduction"
-  },
-  {
     "id": "makerspaces-commons",
     "kind": "commons",
     "name": "Makerspaces",
@@ -242,7 +253,16 @@ export const COMMONS: Commons[] = [
       "Tools and space SHOULD be collectively maintained and cared for by all users",
       "Access SHOULD be open to community members regardless of economic status",
       "Knowledge and skills SHOULD be shared freely among participants",
-      "Governance SHOULD be participatory and community-driven"
+      "Governance SHOULD be participatory and community-driven",
+      "Access MUST be open to anyone who wants to tinker, invent, or learn — entry MUST NOT be restricted to credentialed experts",
+      "The guiding ethic MUST be 'think it, make it, share it' — knowledge and creations SHOULD flow back into the commons",
+      "Learning SHOULD happen informally and convivially through peer interaction, not formal instruction",
+      "Makerspaces SHOULD actively encourage participants to use technology and imagination to address local community problems",
+      "SHOULD operate as decentralized, self-organized spaces with no single cadre of leadership",
+      "SHOULD intensify and diversify their workings everywhere at once rather than scaling in a linear, hierarchical sense",
+      "Growth MUST follow the logic of crystallization — new participants join by resonating with basic structures, not by top-down recruitment",
+      "MUST NOT subordinate peer production to proprietary IP regimes or corporate cooptation",
+      "SHOULD build translocal federations and alliances with other commons and system-change movements"
     ],
     "source_chapter": "Introduction"
   },
@@ -274,7 +294,11 @@ export const COMMONS: Commons[] = [
       "Platform governance MUST be democratic and controlled by workers and/or users, not outside investors",
       "Surplus SHOULD be distributed equitably among member-owners, not extracted as investor profit",
       "Data generated by members SHOULD be treated as a commons, not a proprietary asset",
-      "MUST NOT replicate the extractive neo-feudalism of corporate gig platforms"
+      "MUST NOT replicate the extractive neo-feudalism of corporate gig platforms",
+      "Platform cooperative governance MUST vest control in workers and/or consumers rather than outside investors",
+      "SHOULD use relationalized finance (pooled member funds, transvestment) to decommodify the platform and reduce dependence on extractive capital",
+      "MUST NOT replicate the extractive investor-demands of capitalist platforms (e.g., gig economy rent extraction) under a cooperative veneer — this is commons-washing",
+      "Governance SHOULD ensure that value generated on the platform is redistributed to contributors, not siphoned to capital holders"
     ],
     "source_chapter": "Introduction"
   },
@@ -376,7 +400,11 @@ export const COMMONS: Commons[] = [
       "Contributions SHOULD be made voluntarily and openly, without a corporate hierarchy or payroll directing labor",
       "Peer review and meritocratic validation of code SHOULD govern what gets incorporated into the commons",
       "The commons-based peer production model MUST invite large numbers of participants via open network platforms",
-      "Downstream derivative works SHOULD carry forward the same open, shareable terms (copyleft principle)"
+      "Downstream derivative works SHOULD carry forward the same open, shareable terms (copyleft principle)",
+      "Code MUST be licensed under the GPL or a compatible open source license to remain in the commons",
+      "Contributors SHOULD follow the hacker ethic of sharing, mutual support, and open peer review",
+      "Commercial actors MAY build businesses around open source but MUST NOT eliminate the commons through proprietary enclosure",
+      "The commons and markets SHOULD coexist, though investor-driven businesses MUST NOT be allowed to eliminate the commons in their zones of competition"
     ],
     "source_chapter": "Ch. 1",
     "source_quote": "A virtual community of self-selected hackers, with no payroll or corporate structure, had organized themselves into a fiercely creative, innovative, results-driven commons. Remarkably, it worked! The Linux experiment proved to be a foundational model for what is often known as 'commons-based peer production,' a type of online collaboration that invites huge numbers of people to join forces via open network platforms."
@@ -859,23 +887,6 @@ export const COMMONS: Commons[] = [
     "source_quote": "In India, for example, commoners have compiled a Traditional Knowledge Digital Library, a database of public-domain medical knowledge, to help challenge patent applications that would privatize the community knowledge."
   },
   {
-    "id": "mutual-aid-covid-networks",
-    "kind": "commons",
-    "name": "Covid-Era Mutual Aid Networks",
-    "domain": "social/mutual_aid",
-    "brief": "Spontaneous, peer-organized local mutual aid networks that emerged during the Covid pandemic to provide care, goods, and services where the state and corporate markets failed, demonstrating the speed, flexibility, and resilience of decentralized commoning.",
-    "community": "Peer-organized local community members, neighbors, and volunteers",
-    "care_wealth": "Care, food, medicine, and essential support for community members during public health emergencies",
-    "protocols": [
-      "Mutual aid MUST be decentralized and reciprocal — participants make sure everyone gets what they need so everyone is invested in each other's well-being",
-      "Exchange MUST NOT be tit-for-tat; it is an interchange of care that builds redundancy and resilience, not strict accounting",
-      "Peer-organized mobilization SHOULD be the default when states and markets prove too rigid to respond",
-      "Networks MUST preemptively protect their social practices and ethical culture from attempted enclosures"
-    ],
-    "source_chapter": "Ch. 5",
-    "source_quote": "Mutual aid is 'the decentralized practice of reciprocal care by which participants in a network make sure that everyone gets what they need, so that everyone has reason to be invested in everyone else's well-being. This is not a matter of tit-for-tat exchange, but rather an interchange of care and resources that creates the sort of redundancy and resilience that can sustain a community through difficult times.'"
-  },
-  {
     "id": "blood-organ-donation-gift-economy",
     "kind": "commons",
     "name": "Blood and Organ Donation Gift Economies",
@@ -887,7 +898,11 @@ export const COMMONS: Commons[] = [
       "Transfers of living substances SHOULD be treated as social gifts, not market commodities, to preserve ethical integrity",
       "Cash markets for blood and organs MUST NOT be allowed to displace gift economies — markets attract lower-quality supply and introduce ethical conflicts",
       "Giving SHOULD be motivated by social duty or affection, not expectation of direct personal benefit",
-      "Gift economies SHOULD be maintained as community infrastructure even under pressure from commodification"
+      "Gift economies SHOULD be maintained as community infrastructure even under pressure from commodification",
+      "Donation MUST be voluntary and not monetarily compensated, to preserve the gift ethic",
+      "The resource SHOULD be distributed on the basis of medical need, not ability to pay",
+      "MUST NOT allow commodification or privatization of the donated blood supply",
+      "Social norms of reciprocity and solidarity SHOULD sustain participation without market incentives"
     ],
     "source_chapter": "Ch. 5"
   },
@@ -972,7 +987,11 @@ export const COMMONS: Commons[] = [
       "One hour of service MUST equal one time credit regardless of the type of service, enforcing radical equality of value",
       "Time credits MUST circulate only within the participating community, keeping value local",
       "Administration SHOULD be carried out by trusted community anchors (churches, nonprofits) rather than market intermediaries",
-      "System SHOULD be designed to serve those with more time than money, centering equity in access"
+      "System SHOULD be designed to serve those with more time than money, centering equity in access",
+      "Exchange MUST be denominated in community-issued credit vouchers or time units, not national currency, to make participation accessible to those excluded from formal finance",
+      "The system SHOULD be bounded to a defined community or neighborhood to keep value circulating locally",
+      "All participants SHOULD be able to both earn and spend credits, preventing hierarchies of accumulation",
+      "The system MUST NOT replicate extractive financial relationships — surplus MUST NOT flow to external investors or institutions"
     ],
     "source_chapter": "Ch. 5"
   },
@@ -1147,7 +1166,13 @@ export const COMMONS: Commons[] = [
       "State trusteeship SHOULD be evaluated by whether it upholds the fiduciary duty to present and future generations, not by whether it maximizes economic growth",
       "Neoliberal framing of regulation as a 'burden on capital' MUST be challenged — safety and public-service requirements stabilize society and assure rough social equity",
       "Anti-pattern: regulatory capture — when regulated industries corrupt the formal legal process, the fiduciary duty to commoners is betrayed",
-      "Commoners SHOULD distinguish state trustee commons from genuine self-organized commons while defending both against privatization"
+      "Commoners SHOULD distinguish state trustee commons from genuine self-organized commons while defending both against privatization",
+      "The state MUST act as trustee for commoners, not as owner or sovereign ruler of large CPRs",
+      "State institutions MUST conscientiously protect shared assets from enclosure and ensure access on fair, nondiscriminatory terms",
+      "Commoners MUST have the authority and space to engage in genuine commoning within state-trustee frameworks",
+      "Authority MUST be assigned at the lowest, most appropriate level in the system (subsidiarity principle)",
+      "State trustee commons MUST assure maximum possible transparency and participation — resources belong to the people, not the state",
+      "State bureaucracies MUST NOT conflate trustee management with straightforward state control that excludes ordinary people's involvement"
     ],
     "source_chapter": "Ch. 6"
   },
@@ -1289,24 +1314,6 @@ export const COMMONS: Commons[] = [
     "source_quote": "The idea of the commons provides a unifying principle that dissolves the supposed opposition between nature and society/culture. It cancels the separation of the ecological and the social, and provides us with the means to reimagine the universe and our role in it."
   },
   {
-    "id": "community-land-trust-north-america",
-    "kind": "commons",
-    "name": "Community Land Trusts (CLTs)",
-    "domain": "land",
-    "brief": "Democratically run, regionally based nonprofits that take land off the market in perpetuity and manage it for community benefit, including affordable housing, sustainable agriculture, and local business preservation.",
-    "community": "Regional nonprofit boards and resident/farmer members across North America and Europe",
-    "care_wealth": "Decommodified land held permanently off the speculative market; affordable housing and farm access",
-    "protocols": [
-      "Land MUST be held off the market in perpetuity — it cannot be sold or allowed to appreciate as private speculative property",
-      "Governance MUST be democratic and regionally based, accountable to community members rather than investors",
-      "Residents and farmers SHOULD own and improve buildings on CLT land and recover value from improvements, but MUST NOT own the underlying land or capture market appreciation of it",
-      "CLTs SHOULD be used as vehicles for reparations and wealth-rebuilding for Black and Indigenous communities whose land was historically stolen",
-      "Land SHOULD be made accessible to younger and lower-income farmers through long-term leases rather than sales"
-    ],
-    "source_chapter": "Ch. 8",
-    "source_quote": "Decommodifying land makes it economically feasible to use it for socially important purposes, which may be impossible under conventional markets. By insulating people from soaring land prices, CLTs can help preserve Main Street for locally owned businesses, improve substandard housing, and ensure that local farms can produce food for local people using good farming practices. CLTs have also been important vehicles for reparations to Black and Indigenous communities, and a way for them to rebuild wealth and capital stolen from them throughout American history. But there is still room for individual initiative: Farmers and housing residents who rely on CLT lands can own and improve buildings on the land and recover any increased value that results. But they can't own the land itself or reap appreciated market value from it."
-  },
-  {
     "id": "agrarian-trust-terre-de-liens",
     "kind": "commons",
     "name": "Agrarian Trust (US) & Terre de Liens (France) — Agrarian Commons",
@@ -1321,24 +1328,6 @@ export const COMMONS: Commons[] = [
       "Agrarian commons SHOULD prioritize local food production and ecologically sound farming practices over maximum commercial yield"
     ],
     "source_chapter": "Ch. 8"
-  },
-  {
-    "id": "community-supported-agriculture-csa",
-    "kind": "commons",
-    "name": "Community Supported Agriculture (CSA)",
-    "domain": "food/seed",
-    "brief": "A commons-based arrangement in which community members buy upfront shares in a farm's seasonal harvest, sharing both the risks and the benefits of local agriculture with farmers.",
-    "community": "Local food consumers and farmers; nearly two thousand CSAs in the US and hundreds more worldwide",
-    "care_wealth": "Local farmland productivity, fresh organic food, farmer livelihoods, and shared agricultural risk",
-    "protocols": [
-      "Members MUST purchase upfront shares before the growing season, providing farmers working capital when it is most needed",
-      "Risk MUST be shared mutually — members accept reduced or disappointing harvests without demanding refunds; farmers accept responsibility to grow and distribute honestly",
-      "The goal SHOULD be mutual aid and shared benefit, not profit maximization or market competition with other farms",
-      "Produce SHOULD be distributed directly and regularly (week by week) to maintain the community relationship between grower and eater",
-      "CSA principles MAY be extended beyond food (e.g., jazz shares, community-supported fisheries) to localize other cultural and economic goods"
-    ],
-    "source_chapter": "Ch. 8",
-    "source_quote": "While CSA financing may seem like a business model, making money or competing with other farms is not really the point. The goal is for community members and farmers to help each other, and share the risks and benefits of local agriculture."
   },
   {
     "id": "pioneer-valley-jazz-shares",
@@ -1399,22 +1388,6 @@ export const COMMONS: Commons[] = [
       "Governance structures SHOULD mutualize gains for all participants — farmers, workers, and community members",
       "Farms SHOULD be enabled to grow higher quality food and improve worker wages as a direct result of decommodified surplus capture",
       "The model SHOULD reinvent food supply chains from farm to table within a regional commons framework"
-    ],
-    "source_chapter": "Ch. 8"
-  },
-  {
-    "id": "mutual-credit-timebanking",
-    "kind": "commons",
-    "name": "Mutual Credit and Timebanking Systems",
-    "domain": "money/finance",
-    "brief": "Community exchange systems that allow marginalized communities to meet needs using neighborhood currencies or credit vouchers, enabling goods and services to circulate independently of national currency.",
-    "community": "Marginalized urban and rural communities lacking access to national currency",
-    "care_wealth": "Community labor, skills, and mutual provisioning capacity",
-    "protocols": [
-      "Exchange MUST be denominated in community-issued credit vouchers or time units, not national currency, to make participation accessible to those excluded from formal finance",
-      "The system SHOULD be bounded to a defined community or neighborhood to keep value circulating locally",
-      "All participants SHOULD be able to both earn and spend credits, preventing hierarchies of accumulation",
-      "The system MUST NOT replicate extractive financial relationships — surplus MUST NOT flow to external investors or institutions"
     ],
     "source_chapter": "Ch. 8"
   },
@@ -1495,7 +1468,12 @@ export const COMMONS: Commons[] = [
       "Formal partnerships between city government and citizen groups MUST be established to legitimate and resource urban commons",
       "Governance SHOULD be guided by principles of distributive justice and open data",
       "Commons SHOULD be peer-produced by citizens with city support, not delivered top-down by institutions",
-      "Urban commons governance SHOULD prioritize democratic participation over administrative efficiency"
+      "Urban commons governance SHOULD prioritize democratic participation over administrative efficiency",
+      "City government MUST provide legal, financial, and technical support to projects initiated by commoners, not the reverse",
+      "Cogovernance frameworks MUST be designed to leverage social and creative energies of commoning, not just standardize bureaucratic administration",
+      "Commons/public partnerships SHOULD use specially designed interfaces — semi-permeable membranes — to allow constructive interaction while protecting commoners from enclosure and state overreach",
+      "The interface MUST function as a neutral third zone, buffering commons from harmful external influences while preserving internal freedom to common",
+      "The Co-City methodology SHOULD be applied across cities internationally via LabGov, treating the protocols as transferable infrastructure for cogovernance"
     ],
     "source_chapter": "Ch. 8",
     "source_quote": "LabGov's first project, in Bologna, gave rise to the 'Co-City Protocol,' which outlines how to treat cities as 'an infrastructure enabling cooperation, sharing, and participatory decisions to peer production, supported by open data and guided by principles of distributive justice.'"
@@ -1529,7 +1507,11 @@ export const COMMONS: Commons[] = [
       "Citizens SHOULD reclaim public street space for community use without waiting for government permission",
       "Bottom-up neighborhood beautification SHOULD be organized collectively by residents as a commons act",
       "Commoning projects SHOULD expand organically from small aesthetic acts (intersection painting) to larger social needs (homeless housing, permaculture education)",
-      "City agencies SHOULD eventually support rather than suppress autonomous citizen-led commons initiatives"
+      "City agencies SHOULD eventually support rather than suppress autonomous citizen-led commons initiatives",
+      "SHOULD begin from local passion and geographic rootedness, not top-down planning mandates",
+      "SHOULD grow organically in coordination with local conditions and particular needs rather than through sweeping centralized plans",
+      "SHOULD prioritize practice and on-the-ground experimentation over ideological purity",
+      "Governance MUST remain distributed and self-organized, resisting cooptation by centralized leadership structures"
     ],
     "source_chapter": "Ch. 8"
   },
@@ -1550,39 +1532,6 @@ export const COMMONS: Commons[] = [
     ],
     "source_chapter": "Ch. 8",
     "source_quote": "Thousands of commoners collectively own all of the buildings together while paying an affordable monthly (nonmarket) 'rent' to themselves to cover maintenance costs and keep the federated system going. Because there are high legal barriers to prevent the collectively owned buildings from being sold, residents mostly avoid the risk of rising rents and possible eviction that would occur in market-traded buildings. A portion of everyone's 'rent' payment goes into a 'pay it forward' fund that helps the federation acquire still more buildings."
-  },
-  {
-    "id": "makerspaces-fab-labs-urban",
-    "kind": "commons",
-    "name": "Makerspaces and Fab Labs",
-    "domain": "knowledge/digital",
-    "brief": "Commons-based open workspaces filled with tools, machines, and experienced tech experts where anyone can tinker, invent, and learn informally, guided by the ethic 'think it, make it, share it,' often addressing local problems.",
-    "community": "Tech makers, artists, inventors, and community members in urban settings worldwide",
-    "care_wealth": "Shared tools, machines, technical knowledge, and collaborative creative infrastructure",
-    "protocols": [
-      "Access MUST be open to anyone who wants to tinker, invent, or learn — entry MUST NOT be restricted to credentialed experts",
-      "The guiding ethic MUST be 'think it, make it, share it' — knowledge and creations SHOULD flow back into the commons",
-      "Learning SHOULD happen informally and convivially through peer interaction, not formal instruction",
-      "Makerspaces SHOULD actively encourage participants to use technology and imagination to address local community problems"
-    ],
-    "source_chapter": "Ch. 8"
-  },
-  {
-    "id": "mutual-aid-networks-covid-urban",
-    "kind": "commons",
-    "name": "Mutual Aid Networks (Urban Commons)",
-    "domain": "social/mutual_aid",
-    "brief": "Spontaneously organized volunteer networks that provide social services, emergency support, groceries, medicines, and health care to vulnerable community members — especially evident during the Covid-19 crisis.",
-    "community": "Neighborhood volunteers and vulnerable residents in urban communities worldwide",
-    "care_wealth": "Community care capacity, social services, and emergency support for vulnerable members",
-    "protocols": [
-      "Mutual aid SHOULD arise organically from community initiative, without requiring institutional authorization",
-      "Aid MUST be directed to those most vulnerable — the elderly, sick, and shut-ins — as a community priority",
-      "Networks SHOULD remain volunteer-driven and reciprocal, not transactional or means-tested",
-      "Mutual aid systems SHOULD be built as durable ongoing infrastructure, not only activated in emergencies",
-      "The commons SHOULD take multiple forms: social services, emergency response, health care, and life insurance, depending on community need"
-    ],
-    "source_chapter": "Ch. 8"
   },
   {
     "id": "land-back-movement",
@@ -1730,38 +1679,6 @@ export const COMMONS: Commons[] = [
     ],
     "source_chapter": "Ch. 9",
     "source_quote": "The genius of the GPL is that it ensures that a commons of GPLed software code will forever remain a commons. The code created by a given group of commoners will always stay within the commons. Future users can sell the code (there are a number of commercial vendors of the open source Linux program, for example), but the point of the GPL is that no one can legally withhold access to the code or prevent its reuse."
-  },
-  {
-    "id": "linux-open-source-commons",
-    "kind": "commons",
-    "name": "Linux / Open Source Software Commons",
-    "domain": "knowledge/digital",
-    "brief": "Linux and the broader open source software ecosystem demonstrate that community-built, GPL-licensed software can rival and surpass proprietary products, powering critical global infrastructure while remaining a commons accessible to all.",
-    "community": "Global distributed programmer communities, corporate contributors (IBM, Oracle, HP, NASA, Pixar), and individual developers",
-    "care_wealth": "A shared codebase for a complete, production-grade computer operating system and ecosystem of open source programs",
-    "protocols": [
-      "Code MUST be licensed under the GPL or a compatible open source license to remain in the commons",
-      "Contributors SHOULD follow the hacker ethic of sharing, mutual support, and open peer review",
-      "Commercial actors MAY build businesses around open source but MUST NOT eliminate the commons through proprietary enclosure",
-      "The commons and markets SHOULD coexist, though investor-driven businesses MUST NOT be allowed to eliminate the commons in their zones of competition"
-    ],
-    "source_chapter": "Ch. 9"
-  },
-  {
-    "id": "wikipedia-digital-knowledge-commons",
-    "kind": "commons",
-    "name": "Wikipedia: Global Digital Knowledge Commons",
-    "domain": "knowledge/digital",
-    "brief": "Wikipedia is a volunteer-built, multilingual online encyclopedia governed as a digital republic — a paradigmatic example of commons-based peer production in which tens of thousands of volunteers collaboratively author and maintain millions of articles without market or state control.",
-    "community": "280,000+ volunteers worldwide, editing in more than 300 languages",
-    "care_wealth": "A living, open, multilingual encyclopedia of human knowledge — 55 million articles by 2021",
-    "protocols": [
-      "Content MUST remain openly accessible and freely editable by volunteers under open licensing",
-      "Governance SHOULD be democratic and community-driven rather than corporate or state-controlled",
-      "Contributors SHOULD follow community norms of neutrality, verifiability, and collaborative editing",
-      "The platform MUST NOT be operated for profit or under investor-driven governance that subordinates community interests"
-    ],
-    "source_chapter": "Ch. 9"
   },
   {
     "id": "open-access-academic-publishing",
@@ -2041,22 +1958,6 @@ export const COMMONS: Commons[] = [
     "source_quote": "Keeping something legally inalienable is a far better strategy because it prevents capitalists from appropriating and privatizing nature and governing through markets. The long-term integrity of shared wealth can be protected."
   },
   {
-    "id": "open-source-seeds-relationalized-property",
-    "kind": "commons",
-    "name": "Open Source Seeds — Relationalized Property",
-    "domain": "food/seed",
-    "brief": "Seed breeders and activists worldwide have created a class of legally 'shareable' seeds protected against patent ownership, preventing multinational corporations from privatizing biowealth and monopolizing seed supplies.",
-    "community": "Seed breeders, farmers, and activists in the open-source seed movement globally",
-    "care_wealth": "Crop seeds kept legally shareable and free from patent monopoly as biowealth belonging to the commons",
-    "protocols": [
-      "Open-source seed stewards MUST ensure seeds are legally designated as shareable and protected against downstream patent claims",
-      "MUST NOT allow biotech corporations to impose proprietary sterile or patented seed regimes that destroy sustainable seed sharing",
-      "Seed commons SHOULD use relationalized property legal tools (e.g., open-source licenses adapted for seeds) to prevent enclosure",
-      "Commoners SHOULD actively breed and distribute open-source seed varieties to counter corporate monopolization of the seed supply"
-    ],
-    "source_chapter": "Ch. 10"
-  },
-  {
     "id": "federated-wiki-relationalized-property",
     "kind": "commons",
     "name": "Federated Wiki — Relationalized Digital Property",
@@ -2073,55 +1974,6 @@ export const COMMONS: Commons[] = [
     "source_chapter": "Ch. 10"
   },
   {
-    "id": "community-land-trusts-relationalized-finance",
-    "kind": "commons",
-    "name": "Community Land Trusts — Relationalized Finance",
-    "domain": "urban",
-    "brief": "Community land trusts pool funds from commoners and allies to provide permanently affordable housing and agriculture, decommodifying land and keeping it inalienable from speculative markets through commons governance.",
-    "community": "Residents, low-income households, and community organizations participating in land trusts for affordable housing or agriculture",
-    "care_wealth": "Land and housing decommodified and held in trust for permanent affordability and community benefit",
-    "protocols": [
-      "Land trust governance MUST keep care-wealth inalienable from speculative market circuits through legal trust structures",
-      "Commoners SHOULD pool funds via relationalized finance (transvestment from capitalist circuits) rather than relying solely on conventional debt or equity",
-      "MUST NOT allow outside investors to reappropriate land held in trust for community benefit",
-      "Land trusts SHOULD function as 'private property on the outside, commons on the inside' — combining legal property forms with commons governance",
-      "Governance MUST prioritize use value and long-term community stewardship over exchange value and short-term market returns"
-    ],
-    "source_chapter": "Ch. 10"
-  },
-  {
-    "id": "csa-farms-relationalized-finance",
-    "kind": "commons",
-    "name": "Community-Supported Agriculture (CSA) — Relationalized Finance",
-    "domain": "food/seed",
-    "brief": "CSA farms use advance commitments from local members to finance organic food production outside conventional market pressures, exemplifying relationalized finance that decommodifies food and builds direct community–farmer relationships.",
-    "community": "Local community members and farmers participating in community-supported agriculture arrangements",
-    "care_wealth": "Organic food production and farmland stewarded through direct community financial support rather than market speculation",
-    "protocols": [
-      "CSA governance SHOULD use member advance payments (relationalized finance) to reduce dependence on capitalist credit and market price volatility",
-      "MUST NOT structure CSA finance in ways that reintroduce pressure to maximize profits at the expense of ecological stewardship",
-      "Commoners SHOULD treat CSA membership as an act of co-stewardship, not merely consumer transaction",
-      "SHOULD design CSA arrangements so that shared risk between farmers and members replicates commons solidarity rather than market individualism"
-    ],
-    "source_chapter": "Ch. 10"
-  },
-  {
-    "id": "platform-cooperatives-relationalized-finance",
-    "kind": "commons",
-    "name": "Platform Cooperatives — Relationalized Finance",
-    "domain": "labor",
-    "brief": "Platform cooperatives allow workers and consumers to mutualize benefits on their own terms via commons governance, bypassing the extractive demands of outside investors and lenders that typify capitalist platform models.",
-    "community": "Workers and consumers organized into platform cooperatives to govern digital labor and service platforms",
-    "care_wealth": "Digital platform infrastructure, labor, and the value generated by workers and users, kept within commons circuits",
-    "protocols": [
-      "Platform cooperative governance MUST vest control in workers and/or consumers rather than outside investors",
-      "SHOULD use relationalized finance (pooled member funds, transvestment) to decommodify the platform and reduce dependence on extractive capital",
-      "MUST NOT replicate the extractive investor-demands of capitalist platforms (e.g., gig economy rent extraction) under a cooperative veneer — this is commons-washing",
-      "Governance SHOULD ensure that value generated on the platform is redistributed to contributors, not siphoned to capital holders"
-    ],
-    "source_chapter": "Ch. 10"
-  },
-  {
     "id": "complementary-local-currencies-commons",
     "kind": "commons",
     "name": "Complementary Local and Neighborhood Currencies",
@@ -2133,7 +1985,11 @@ export const COMMONS: Commons[] = [
       "Community currency governance MUST be designed so that value circulates within the commons rather than leaking to external capital circuits",
       "SHOULD use complementary currencies as a tool of transvestment — moving value from capitalist circuits into commons-based provisioning",
       "Currency governance MUST NOT allow speculative or extractive uses that undermine the currency's role in supporting local commons",
-      "SHOULD integrate currency design with broader commons governance to reinforce peer stewardship and solidarity"
+      "SHOULD integrate currency design with broader commons governance to reinforce peer stewardship and solidarity",
+      "Currency SHOULD be issued and governed by the community it serves, not external financial institutions",
+      "Circulation MUST be kept local to reinforce community economic bonds",
+      "Governance SHOULD be transparent and participatory",
+      "MUST NOT be captured by speculative financial interests or converted into instruments of extraction"
     ],
     "source_chapter": "Ch. 10"
   },
@@ -2149,7 +2005,11 @@ export const COMMONS: Commons[] = [
       "Rights-of-nature frameworks MUST assign legal trustees and guardians to ecosystems, not vest control in market owners",
       "SHOULD design legal personhood for nature to prevent financialization and enclosure by capitalist actors",
       "Governance MUST honor elemental imperatives of planetary ecosystems at bioregional and local levels",
-      "MUST NOT allow rights-of-nature provisions to be co-opted as greenwashing cover for ongoing extraction — this is an anti-pattern of commons-washing"
+      "MUST NOT allow rights-of-nature provisions to be co-opted as greenwashing cover for ongoing extraction — this is an anti-pattern of commons-washing",
+      "Legal hacks SHOULD recognize generative powers of living systems that lie outside the market/state worldview, even when Western legal language is imperfect for the task",
+      "Rights of nature frameworks MUST NOT be treated as finalized solutions — they SHOULD be understood as opening necessary conversations and spurring new legal innovations",
+      "Legal advocates SHOULD acknowledge the complications of using Western legal concepts to protect living orders operating under very different terms",
+      "These hacks SHOULD catalyze new social movements that challenge the reduction of nature to commodity"
     ],
     "source_chapter": "Ch. 10"
   },
@@ -2232,7 +2092,11 @@ export const COMMONS: Commons[] = [
       "Users MUST make future derivations of OSSI seeds available for public use under the same terms (copyleft principle)",
       "Patenting or otherwise privatizing OSSI-pledged seeds or their derivatives MUST NOT be permitted",
       "The license SHOULD be used to override law's default presumption that only proprietary (patent) control creates value",
-      "Collaboration and sharing SHOULD be treated as legitimate, legally recognized sources of public-spirited innovation"
+      "Collaboration and sharing SHOULD be treated as legitimate, legally recognized sources of public-spirited innovation",
+      "Open-source seed stewards MUST ensure seeds are legally designated as shareable and protected against downstream patent claims",
+      "MUST NOT allow biotech corporations to impose proprietary sterile or patented seed regimes that destroy sustainable seed sharing",
+      "Seed commons SHOULD use relationalized property legal tools (e.g., open-source licenses adapted for seeds) to prevent enclosure",
+      "Commoners SHOULD actively breed and distribute open-source seed varieties to counter corporate monopolization of the seed supply"
     ],
     "source_chapter": "Ch. 11",
     "source_quote": "One legal hack that builds on this idea is the Open Source Seed Initiative (OSSI), launched by a number of farmers, seed breeders, and others. It emulates the licenses used by free and open-source software by giving anyone the right to share agricultural seeds and future derivations so long as subsequent users also make those seeds available for public use. Again, the point of the licenses is to override the law's presumption that only proprietary control, through patenting, creates value. The licenses instead legalize sharing and collaboration as important sources of public-spirited innovation."
@@ -2289,61 +2153,6 @@ export const COMMONS: Commons[] = [
     ],
     "source_chapter": "Ch. 11",
     "source_quote": "Under its Citizen Asset Program (CAP), a new measurement tool was created to evaluate the actual contributions of city residents as commoners. So instead of measuring economic returns from transferring public assets to private businesses, as PPPs do, the Social Return on Investment tool measures hours spent by citizens in citizen assemblies, project activities, and building maintenance, and the eventual social returns from them. These calculations help the city visualize the social value of projects and shift long-term building leases to grassroots groups."
-  },
-  {
-    "id": "bologna-co-city-protocols",
-    "kind": "commons",
-    "name": "Bologna Regulation for the Care and Regeneration of Urban Commons / Co-City Protocols",
-    "domain": "urban",
-    "brief": "A legal framework pioneered in Bologna, Italy, and developed by LabGov into the Co-City Protocols, enabling city governments to provide legal, financial, and technical support to commoner-initiated projects — including eldercare, kindergartens, public spaces, and abandoned building rehabilitation — through formalized cogovernance.",
-    "community": "Bologna city residents and commoner groups, later expanded through LabGov's international network",
-    "care_wealth": "Eldercare centers, kindergartens, public spaces, abandoned buildings, and urban social infrastructure",
-    "protocols": [
-      "City government MUST provide legal, financial, and technical support to projects initiated by commoners, not the reverse",
-      "Cogovernance frameworks MUST be designed to leverage social and creative energies of commoning, not just standardize bureaucratic administration",
-      "Commons/public partnerships SHOULD use specially designed interfaces — semi-permeable membranes — to allow constructive interaction while protecting commoners from enclosure and state overreach",
-      "The interface MUST function as a neutral third zone, buffering commons from harmful external influences while preserving internal freedom to common",
-      "The Co-City methodology SHOULD be applied across cities internationally via LabGov, treating the protocols as transferable infrastructure for cogovernance"
-    ],
-    "source_chapter": "Ch. 11",
-    "source_quote": "This initiative began in Bologna, Italy, as a way for the city government to provide legal, financial, and technical support to projects initiated by commoners. Projects have included management of eldercare centers, kindergartens, and public spaces as well as rehabilitating abandoned buildings. The Co-City Protocols are a developed legal framework and methodology for guiding cogovernance initiatives in cities."
-  },
-  {
-    "id": "gpl-creative-commons-legal-hack",
-    "kind": "commons",
-    "name": "General Public License (GPL) and Creative Commons Licenses as Legal Hacks",
-    "domain": "knowledge/digital",
-    "brief": "The GPL and Creative Commons licenses are landmark legal hacks that reverse copyright law's default privatization by making software and creative works legally shareable in perpetuity without permission or payment, establishing sharing as the default and enabling generative commoning at scale.",
-    "community": "Software developers, digital content creators, and knowledge commons communities worldwide",
-    "care_wealth": "Software code, digital content, and the cultural and technical knowledge commons they sustain",
-    "protocols": [
-      "Works released under GPL or CC licenses MUST be shareable in perpetuity without permission or payment required",
-      "Legal hacks MUST reverse the law's default presumption of privatization, making sharing the default practice instead",
-      "Derivative works SHOULD be required to carry forward the same sharing terms (copyleft), preventing enclosure downstream",
-      "Legal hacks MUST NOT allow subsequent users to re-privatize the commons through patent or copyright claims",
-      "Legal structures SHOULD protect and stimulate collective intelligence by legally recognizing the consequences of one's activity for others and for the commons beyond the individual"
-    ],
-    "source_chapter": "Ch. 11",
-    "source_quote": "Two of the most seminal and effective legal hacks in recent history, discussed earlier, are the General Public License (GPL) for software and Creative Commons (CC) licenses for digital and other content. Both sets of legal hacks dramatically reverse the intentions of copyright law by making works legally shareable in perpetuity without any permission or payment required. Instead of automatic privatization of ownership and control, the licenses establish sharing as the default practice!"
-  },
-  {
-    "id": "state-trustee-commons-framework",
-    "kind": "commons",
-    "name": "State Trustee Commons (Framework)",
-    "domain": "land",
-    "brief": "A governance framework in which the state acts explicitly as trustee for commoners — not owner — of large common-pool resources such as national parks and public lands, with affirmative obligations for transparency, participation, subsidiarity, and protection from enclosure.",
-    "community": "Citizens and commoners as beneficiaries; state bureaucracies as trustees with constrained, fiduciary roles",
-    "care_wealth": "National parks, federally funded research, public lands, and other large-scale common-pool resources",
-    "protocols": [
-      "The state MUST act as trustee for commoners, not as owner or sovereign ruler of large CPRs",
-      "State institutions MUST conscientiously protect shared assets from enclosure and ensure access on fair, nondiscriminatory terms",
-      "Commoners MUST have the authority and space to engage in genuine commoning within state-trustee frameworks",
-      "Authority MUST be assigned at the lowest, most appropriate level in the system (subsidiarity principle)",
-      "State trustee commons MUST assure maximum possible transparency and participation — resources belong to the people, not the state",
-      "State bureaucracies MUST NOT conflate trustee management with straightforward state control that excludes ordinary people's involvement"
-    ],
-    "source_chapter": "Ch. 11",
-    "source_quote": "I like to call government-run programs state trustee commons to emphasize that the resources belong to the people, not the state. The state is a trustee with specific, affirmative obligations to assure maximum possible transparency, participation, and stewardship at the lowest jurisdictional level possible ('subsidiarity')."
   },
   {
     "id": "market-state-enclosure-of-commons",
@@ -2415,22 +2224,6 @@ export const COMMONS: Commons[] = [
     "source_chapter": "Ch. 11"
   },
   {
-    "id": "rights-of-nature-legal-hack",
-    "kind": "commons",
-    "name": "Rights of Nature and Self-Owning Land (Legal Hacks)",
-    "domain": "land",
-    "brief": "Legal hacks that extend rights to rivers, wildlife, and living ecosystems — and in some cases to Indigenous cultures — opening conversations and social movements that challenge the market/state worldview's treatment of nature as mere property or resource.",
-    "community": "Indigenous peoples, environmental legal advocates, and rights-of-nature social movements globally",
-    "care_wealth": "Rivers, wildlife, ecosystems, and Indigenous cultural relationships to living land",
-    "protocols": [
-      "Legal hacks SHOULD recognize generative powers of living systems that lie outside the market/state worldview, even when Western legal language is imperfect for the task",
-      "Rights of nature frameworks MUST NOT be treated as finalized solutions — they SHOULD be understood as opening necessary conversations and spurring new legal innovations",
-      "Legal advocates SHOULD acknowledge the complications of using Western legal concepts to protect living orders operating under very different terms",
-      "These hacks SHOULD catalyze new social movements that challenge the reduction of nature to commodity"
-    ],
-    "source_chapter": "Ch. 11"
-  },
-  {
     "id": "green-governance-macroprinciples",
     "kind": "commons",
     "name": "Green Governance Macroprinciples for Commons-Supportive International Law",
@@ -2467,23 +2260,6 @@ export const COMMONS: Commons[] = [
     "source_chapter": "Ch. 11"
   },
   {
-    "id": "city-repair-portland",
-    "kind": "commons",
-    "name": "City Repair — Portland Neighborhood Commons",
-    "domain": "urban",
-    "brief": "Mark Lakeman's City Repair is an enterprising civic project dedicated to reviving neighborhood spaces in Portland, Oregon, demonstrating how small-scale urban commoning can rebuild community and public space.",
-    "community": "Portland, Oregon residents and civic organizers led by Mark Lakeman",
-    "care_wealth": "Neighborhood public spaces and the social fabric of urban community life",
-    "protocols": [
-      "SHOULD begin from local passion and geographic rootedness, not top-down planning mandates",
-      "SHOULD grow organically in coordination with local conditions and particular needs rather than through sweeping centralized plans",
-      "SHOULD prioritize practice and on-the-ground experimentation over ideological purity",
-      "Governance MUST remain distributed and self-organized, resisting cooptation by centralized leadership structures"
-    ],
-    "source_chapter": "Conclusion",
-    "source_quote": "I think of Mark Lakeman and City Repair, an enterprising civic project dedicated to reviving neighborhood spaces in Portland, Oregon... The point in any of these instances is not so much to 'scale' the commons in a linear, hierarchical sense—that's so twentieth century!—but rather to intensify and diversify its workings everywhere at once, honoring distributed autonomy."
-  },
-  {
     "id": "arvari-river-rajendra-singh",
     "kind": "commons",
     "name": "Arvari River Commons — Young India Association",
@@ -2499,24 +2275,6 @@ export const COMMONS: Commons[] = [
     ],
     "source_chapter": "Conclusion",
     "source_quote": "Rajendra Singh and his Young India Association, which has reclaimed the nearly dry Arvari River by applying commons principles."
-  },
-  {
-    "id": "hackerspaces-fab-labs-commons",
-    "kind": "commons",
-    "name": "Hackerspaces and Fab Labs — Open Hardware and Digital Commons",
-    "domain": "knowledge/digital",
-    "brief": "Commoners around the world have created dozens of hackerspaces and Fab Labs to co-produce software, customized fabrication, and open hardware design and manufacturing as shared knowledge commons.",
-    "community": "Distributed global communities of hackers, makers, and digital commoners",
-    "care_wealth": "Open-source software, open hardware designs, fabrication knowledge, and shared physical/digital infrastructure",
-    "protocols": [
-      "SHOULD operate as decentralized, self-organized spaces with no single cadre of leadership",
-      "SHOULD intensify and diversify their workings everywhere at once rather than scaling in a linear, hierarchical sense",
-      "Growth MUST follow the logic of crystallization — new participants join by resonating with basic structures, not by top-down recruitment",
-      "MUST NOT subordinate peer production to proprietary IP regimes or corporate cooptation",
-      "SHOULD build translocal federations and alliances with other commons and system-change movements"
-    ],
-    "source_chapter": "Conclusion",
-    "source_quote": "The dozens of hackerspaces and Fab Labs that commoners have created to co-produce software, customized fabrication, and open hardware design and manufacturing."
   },
   {
     "id": "crystallization-commons-growth-pattern",
@@ -2535,25 +2293,6 @@ export const COMMONS: Commons[] = [
     ],
     "source_chapter": "Conclusion",
     "source_quote": "The point in any of these instances is not so much to 'scale' the commons in a linear, hierarchical sense—that's so twentieth century!—but rather to intensify and diversify its workings everywhere at once, honoring distributed autonomy. The process is more akin to crystallization, as my friend Silke Helfrich once put it. New 'atoms' join the crystal as they resonate with its basic structures and ideas, and soon the crystal begins to take shape and grow in all directions without any traces of hierarchy or points of centralization."
-  },
-  {
-    "id": "parallel-polis-commons",
-    "kind": "commons",
-    "name": "Parallel Polis — Commons as Emergent Alternative Governance",
-    "domain": "social/mutual_aid",
-    "brief": "Bollier calls for building durable new institutions of commoning — a 'parallel polis' — that can flourish within the husk of the etiolated market/state system, offering an emergent alternative governance structure for the Ecocene era.",
-    "community": "Commoners globally across all domains, allied with Degrowth, Solidarity Economy, Transition Towns, Doughnut Economics, and peer production movements",
-    "care_wealth": "Democratic governance capacity, vernacular law, care infrastructure, and inalienable care-wealth converted from capitalist resource-extraction",
-    "protocols": [
-      "MUST devise durable new institutions of commoning as a parallel polis — not merely reform existing market/state structures",
-      "MUST NOT rely solely on electing the right candidates or passing new laws — old governance systems are too corrupt and structurally anchored",
-      "Vision MUST be 'coenacted' by commoners themselves over time through active experimentation, debate, and innovation — it cannot be declared by a brilliant leader",
-      "SHOULD build commons/public partnerships that empower commoners, foster subsidiarity of control, and reconfigure state power",
-      "SHOULD develop new legal hacks, commons-friendly infrastructures, relationalized property forms, and translocal federations to normalize commoning",
-      "SHOULD build institutional structures of care — assisted perhaps by universal basic income — so that care and connection can supplant productivity-driven extraction"
-    ],
-    "source_chapter": "Conclusion",
-    "source_quote": "The most urgent task is to devise durable new institutions of commoning—a parallel polis that can flourish within the husk of the etiolated market/state system... Commoning has the advantages of converting capitalist resource-extraction into inalienable care-wealth and placing enforceable limits on the use of natural systems. It grounds provisioning in bioregional settings and builds grassroots practices and norms to enact a postgrowth vision."
   },
   {
     "id": "commons-as-gift-and-duty",
