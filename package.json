@@ -10,7 +10,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
-    "extract": "tsx scripts/extract-data.ts",
+    "extract": "tsx scripts/extract-data.commons.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

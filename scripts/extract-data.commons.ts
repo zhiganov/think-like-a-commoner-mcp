@@ -1,16 +1,36 @@
-// scripts/extract-data.ts
+// =============================================================================
+// extract-data.commons.ts
+// -----------------------------------------------------------------------------
+// Commons-domain config + reference instance for the extraction pipeline.
+// Pairs with extract-core.ts (which contains the book-agnostic infrastructure).
 //
-// Synced from book-power/templates/mcp-server-handcrafted/extract-data.template.ts
-// (canonical source per book-power/CLAUDE.md "Preferred extraction approach").
+// This file is reusable across any commons-themed book (Bollier's *Think Like
+// a Commoner*, Bauwens & Kostakis on P2P commons, Helfrich's *Patterns of
+// Commoning*, etc.) — they share the same Catalog set (commons / enclosures /
+// strategies / ostrom / glossary / quotes), the same DOMAINS enum, and a
+// substantially similar SYSTEM_PROMPT structure.
 //
-// When updating the structural sections (per-chapter sequential extraction with
-// ids_so_far passthrough, post-extraction semantic dedup pass, prompt caching,
-// cache machinery), update the template FIRST and re-sync this file from there.
-// Book-specific bits (SOURCE path, DOMAINS enum, TOOLS map, system prompt
-// content, Ostrom-targeted extraction) are unique to this MCP and do not
-// propagate back to the template.
+// To use this for a commons-themed book MCP:
+//   1. Copy this file to book-power-output/mcp/<name>/scripts/extract-data.commons.ts
+//      (also copy extract-core.ts as scripts/extract-core.ts).
+//   2. Customize per-book bits:
+//      - SOURCE: path to your book's source markdown
+//      - SYSTEM_PROMPT: replace the *Think Like a Commoner* references with
+//        your book/author/edition; keep the structural sections intact
+//        (extraction discipline, modal markers, anti-pattern surfacing,
+//        domain enum, inclusion criteria, target sizes, kind discriminator,
+//        output rules)
+//      - extractTargetedFixedCardinality: replace the Ostrom-targeted call
+//        with your book's equivalent (or drop it if no fixed-cardinality
+//        catalog exists)
+//   3. Update package.json's "extract" script to point at this file.
 //
-// Last sync from template: 2026-05-04 (book-power#22 / TLAC#7).
+// For non-commons domains (JTBD, governance, technical, etc.), copy this file
+// as a structural starting point but expect to rewrite Catalog / TOOLS /
+// FILE_HEADERS entirely — they encode commons taxonomy.
+//
+// Reference instance: book-power-output/mcp/think-like-a-commoner/scripts/extract-data.commons.ts
+// =============================================================================
 
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
@@ -18,27 +38,43 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import {
+  type ToolSchema,
+  type ExtractConfig,
+  entriesArray,
+  chapterChunks,
+  callTool,
+  extractCatalog,
+  dedupCatalog,
+} from './extract-core.js';
+
+// === BOOK-SPECIFIC CONFIG ===
+// Adjust these for each commons book.
+
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const SOURCE = join(ROOT, 'books', 'think-like-a-commoner.md');
+const SOURCE = join(ROOT, 'books', 'think-like-a-commoner.md'); // CUSTOMIZE: per-book source path
 const DATA_DIR = join(ROOT, 'src', 'data');
 const CACHE_DIR = join(ROOT, '.extraction-cache');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 const MODEL = 'claude-sonnet-4-6';
 
+// === COMMONS-DOMAIN CONFIG ===
+// Reusable across any commons-themed book.
+
 type Catalog =
   | 'commons' | 'enclosures' | 'strategies'
   | 'ostrom' | 'glossary' | 'quotes';
 
-// Domain enum mirrored here for the extraction prompt + tool schema validation
+// Care-wealth domains common to commons-shaped books. If your book emphasizes
+// a different axis (e.g., explicitly cultural commons only, or specific
+// industries), adjust this enum.
 const DOMAINS = [
   'land', 'water', 'food/seed', 'knowledge/digital',
   'social/mutual_aid', 'urban', 'money/finance',
   'labor', 'energy', 'cultural',
 ] as const;
 
-// System prompt is the same across ALL calls — eligible for prompt caching.
-// Made deliberately rich so it crosses the 1024-token cache minimum for Sonnet.
 const SYSTEM_PROMPT = `You are extracting structured catalog entries from David Bollier's "Think Like a Commoner: A Short Introduction to the Life of the Commons" (Second Edition, 2024, New Society Publishers, CC BY-NC-SA 4.0) for an MCP server that helps practitioners apply Bollier's framing to real situations.
 
 Domain audience: commons stewards/organizers and movement strategists. Tools that consume your output will help users diagnose enclosures, design commons, and reframe market-mind problems in commoning-mind terms.
@@ -107,19 +143,6 @@ If you're tagging something as "enclosure" or "anti-pattern" in the commons cata
 
 OUTPUT
 You must call the provided tool with structured arguments. Do not narrate, do not output prose. If a chapter has no entries that fit the schema, call the tool with an empty array.`;
-
-// Tool schemas — used as Anthropic tools (input_schema) for forced structured output.
-type ToolSchema = { name: string; description: string; input_schema: any };
-
-function entriesArray(itemSchema: any): any {
-  return {
-    type: 'object',
-    properties: {
-      entries: { type: 'array', items: itemSchema },
-    },
-    required: ['entries'],
-  };
-}
 
 const TOOLS: Record<Catalog, ToolSchema> = {
   commons: {
@@ -235,287 +258,25 @@ const FILE_HEADERS: Record<Catalog, string> = {
   quotes: `import type { Quote } from '../types.js';\n\nexport const QUOTES: Quote[] = `,
 };
 
-// Catalogs that should skip part-divider chapters (lightweight content, low yield)
 const SKIP_PART_DIVIDERS: Set<Catalog> = new Set(['commons', 'enclosures', 'strategies']);
-
-function slugify(label: string): string {
-  return label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
-}
-
-function chapterChunks(source: string): { chapterLabel: string; text: string; isPartDivider: boolean }[] {
-  const lines = source.split('\n');
-  const chunks: { chapterLabel: string; text: string; isPartDivider: boolean }[] = [];
-  let currentLabel = 'Frontmatter';
-  let currentLines: string[] = [];
-  for (const line of lines) {
-    if (/^# [^#]/.test(line)) {
-      if (currentLines.length) {
-        chunks.push({
-          chapterLabel: currentLabel,
-          text: currentLines.join('\n'),
-          isPartDivider: /^Part\s/i.test(currentLabel),
-        });
-      }
-      currentLabel = line.replace(/^# /, '').trim();
-      currentLines = [line];
-    } else {
-      currentLines.push(line);
-    }
-  }
-  if (currentLines.length) {
-    chunks.push({
-      chapterLabel: currentLabel,
-      text: currentLines.join('\n'),
-      isPartDivider: /^Part\s/i.test(currentLabel),
-    });
-  }
-  return chunks;
-}
-
-async function callExtraction(
-  tool: ToolSchema,
-  userContent: string
-): Promise<any[]> {
-  const response = await client.messages.create({
-    model: MODEL,
-    max_tokens: 8000,
-    // Cache the system prompt — same across every call in the run
-    system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } } as any],
-    // Cache the tool schema — same for all 18 calls within a single catalog (5-min TTL)
-    tools: [{ ...tool, cache_control: { type: 'ephemeral' } } as any],
-    tool_choice: { type: 'tool', name: tool.name },
-    messages: [{ role: 'user', content: userContent }],
-  });
-
-  const toolUse = response.content.find((b: any) => b.type === 'tool_use');
-  if (!toolUse || toolUse.type !== 'tool_use') {
-    console.error('  No tool_use in response:', JSON.stringify(response.content).slice(0, 300));
-    return [];
-  }
-  const input = toolUse.input as { entries?: any[] };
-  return Array.isArray(input.entries) ? input.entries : [];
-}
-
-async function extractChapter(
-  catalog: Catalog,
-  chunk: { chapterLabel: string; text: string },
-  idsSoFar: string[]
-): Promise<any[]> {
-  const cachePath = join(CACHE_DIR, catalog, `${slugify(chunk.chapterLabel)}.json`);
-
-  // Restart-safety: if cached, skip the API call
-  if (existsSync(cachePath)) {
-    return JSON.parse(readFileSync(cachePath, 'utf-8'));
-  }
-
-  const idsContext = idsSoFar.length > 0
-    ? `
-
-ALREADY EXTRACTED FROM PRIOR CHAPTERS (DO NOT RE-EMIT THESE IDs):
-${idsSoFar.join(', ')}
-
-If this chapter expands on one of those concepts, leave its slug alone — the dedup pass will fold any new context in. Do NOT invent a new slug ("foo-as-relationalized-finance", "foo-north-america") for the same concept under a slightly different framing.`
-    : '';
-
-  const userContent = `CHAPTER: ${chunk.chapterLabel}
-
-CONTENT:
-${chunk.text}
-
-Extract every entry from this chapter that fits the tool schema. If no entries fit, call the tool with entries: [].${idsContext}`;
-
-  const entries = await callExtraction(TOOLS[catalog], userContent);
-
-  mkdirSync(join(CACHE_DIR, catalog), { recursive: true });
-  writeFileSync(cachePath, JSON.stringify(entries, null, 2));
-  return entries;
-}
-
-// Per-catalog extraction is sequential (not concurrent) so each chapter call
-// can see the ids extracted from earlier chapters and avoid coining a new slug
-// for an already-named concept. This is the load-bearing fix from book-power#22:
-// without ids_so_far passthrough, the model independently re-coins slugs across
-// chapters and the post-pass dedup has to clean up. Sequential is ~4x slower
-// wall time but the system prompt + tool schema stay cached so cost is unchanged.
-async function extractCatalog(
-  catalog: Catalog,
-  chunks: { chapterLabel: string; text: string; isPartDivider: boolean }[]
-): Promise<any[]> {
-  console.log(`\n=== Extracting ${catalog} ===`);
-
-  const eligible = chunks.filter(c => !(SKIP_PART_DIVIDERS.has(catalog) && c.isPartDivider));
-  console.log(`  ${eligible.length} chapters to process (sequential — ids_so_far passed forward)`);
-
-  const idsSoFar: string[] = [];
-  const all: any[] = [];
-
-  for (let i = 0; i < eligible.length; i++) {
-    const chunk = eligible[i];
-    const entries = await extractChapter(catalog, chunk, idsSoFar);
-    process.stdout.write(`  [${i + 1}/${eligible.length}] ${chunk.chapterLabel}: +${entries.length}\n`);
-
-    // Track ids; string-equal dedup happens here too in case the model still
-    // emits the same id twice across chapters despite ids_so_far guidance.
-    for (const e of entries) {
-      const key = e.id ?? e.term ?? `${e.number ?? ''}-${e.name ?? ''}` as string;
-      if (!idsSoFar.includes(key)) {
-        idsSoFar.push(key);
-        all.push(e);
-      }
-    }
-  }
-  console.log(`  Total ${catalog}: ${all.length} (after string-equal dedup)`);
-  return all;
-}
-
-// Catalogs eligible for the post-extraction semantic dedup pass. Excluded:
-// - ostrom: fixed cardinality (8 principles), targeted extraction handles dedup natively
 const DEDUP_CATALOGS: Set<Catalog> = new Set(['commons', 'enclosures', 'strategies', 'glossary', 'quotes']);
 
-const DEDUP_TOOL: ToolSchema = {
-  name: 'propose_merges',
-  description: 'Propose semantic dedup merges for the catalog. Each merge picks one canonical id (keep) and lists the others to fold into it (drop).',
-  input_schema: {
-    type: 'object',
-    properties: {
-      merges: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            keep: { type: 'string', description: 'The canonical id to keep' },
-            drop: { type: 'array', items: { type: 'string' }, description: 'Slugs to fold into keep — same concept under different framings/regions/sub-aspects' },
-            reason: { type: 'string', description: 'One sentence: what concept these all describe' },
-          },
-          required: ['keep', 'drop', 'reason'],
-        },
-      },
-    },
-    required: ['merges'],
-  },
+const config: ExtractConfig<Catalog> = {
+  client,
+  model: MODEL,
+  systemPrompt: SYSTEM_PROMPT,
+  cacheDir: CACHE_DIR,
+  tools: TOOLS,
+  skipPartDividers: SKIP_PART_DIVIDERS,
+  dedupCatalogs: DEDUP_CATALOGS,
 };
 
-// Post-extraction semantic dedup pass: given the full catalog, ask Sonnet to
-// surface groups of semantic duplicates that survived the per-chapter
-// ids_so_far passthrough. Apply by unioning protocols (where applicable) and
-// dropping the merged-out entries.
-async function dedupCatalog(catalog: Catalog, entries: any[]): Promise<any[]> {
-  if (entries.length < 10) {
-    console.log(`  [dedup] ${catalog}: ${entries.length} entries, skipping (too few)`);
-    return entries;
-  }
-
-  console.log(`\n=== Deduping ${catalog} (${entries.length} entries) ===`);
-
-  const cachePath = join(CACHE_DIR, catalog, '_dedup.json');
-  let merges: Array<{ keep: string; drop: string[]; reason: string }>;
-
-  if (existsSync(cachePath)) {
-    merges = JSON.parse(readFileSync(cachePath, 'utf-8'));
-    console.log(`  cache hit (${merges.length} merges proposed)`);
-  } else {
-    const summaries = entries.map(e => {
-      const id = e.id ?? e.term ?? `${e.number ?? ''}-${e.name ?? ''}`;
-      const blurb = (e.brief ?? e.description ?? e.definition ?? e.text ?? e.signature ?? '').slice(0, 140).replace(/\s+/g, ' ');
-      return `${id} | ${e.name ?? e.term ?? id} | ${blurb}`;
-    }).join('\n');
-
-    const userContent = `Below is a flat list of all "${catalog}" entries extracted from David Bollier's *Think Like a Commoner* (2nd ed.), one per line: id | name | brief.
-
-Identify groups of semantically duplicate entries — same concept under different slugs, framings, regions, or sub-aspects. For each group:
-- Pick the cleanest/canonical id as the primary ("keep")
-- List the other ids to merge into it ("drop")
-- One-sentence reason naming what concept the group all describe
-
-ONLY merge entries that genuinely describe the same concept. Common examples to merge:
-- Same case under different names ("wikipedia-knowledge-commons" + "wikipedia-digital-knowledge-commons")
-- Same concept under different framings ("X-as-relationalized-property" + "X" + "X-as-relationalized-finance")
-- Sub-aspect entries that overlap fully with a parent entry
-- "(Concept)" + "(Framework)" pairs
-
-DO NOT merge entries that describe distinct cases, even if they share a name pattern:
-- Different geographic instances of the same model (Bangla-Pesa vs BerkShares are both local currencies but distinct cases — keep both)
-- Different sub-spheres Bollier deliberately distinguishes (Triad of Commoning's three spheres are intentional, not duplicates)
-
-If no duplicates are present, return an empty merges array. Don't force merges to look productive.
-
-Entries:
-${summaries}`;
-
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: 8000,
-      system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } } as any],
-      tools: [{ ...DEDUP_TOOL, cache_control: { type: 'ephemeral' } } as any],
-      tool_choice: { type: 'tool', name: DEDUP_TOOL.name },
-      messages: [{ role: 'user', content: userContent }],
-    });
-
-    const toolUse = response.content.find((b: any) => b.type === 'tool_use');
-    if (!toolUse || toolUse.type !== 'tool_use') {
-      console.warn(`  [dedup] ${catalog}: no tool_use in response, skipping`);
-      return entries;
-    }
-    merges = (toolUse.input as { merges?: any[] }).merges ?? [];
-
-    mkdirSync(join(CACHE_DIR, catalog), { recursive: true });
-    writeFileSync(cachePath, JSON.stringify(merges, null, 2));
-  }
-
-  if (merges.length === 0) {
-    console.log(`  no merges proposed`);
-    return entries;
-  }
-
-  // Apply: union protocols (where applicable), drop merged entries
-  const dropSet = new Set<string>();
-  const protoUnions = new Map<string, string[]>();
-
-  const idOf = (e: any): string => e.id ?? e.term ?? `${e.number ?? ''}-${e.name ?? ''}`;
-  const byId = new Map<string, any>(entries.map(e => [idOf(e), e]));
-
-  for (const m of merges) {
-    const kept = byId.get(m.keep);
-    if (!kept) {
-      console.warn(`  WARNING: keep "${m.keep}" not in catalog — skipping`);
-      continue;
-    }
-
-    if (Array.isArray(kept.protocols)) {
-      const union = [...kept.protocols];
-      const seen = new Set(union);
-      for (const dropId of m.drop) {
-        const dropped = byId.get(dropId);
-        if (!dropped) continue;
-        for (const p of (dropped.protocols ?? [])) {
-          if (!seen.has(p)) {
-            union.push(p);
-            seen.add(p);
-          }
-        }
-      }
-      if (union.length > kept.protocols.length) {
-        protoUnions.set(m.keep, union);
-      }
-    }
-
-    for (const dropId of m.drop) {
-      if (byId.has(dropId)) dropSet.add(dropId);
-    }
-    console.log(`  merge: ${m.keep} ← ${m.drop.join(', ')}`);
-  }
-
-  const final = entries
-    .filter(e => !dropSet.has(idOf(e)))
-    .map(e => protoUnions.has(idOf(e)) ? { ...e, protocols: protoUnions.get(idOf(e)) } : e);
-
-  console.log(`  After dedup: ${final.length} (was ${entries.length}, -${entries.length - final.length})`);
-  return final;
-}
-
-// Special case: Ostrom's 8 principles live almost entirely in Ch. 2 (with Ch. 1 setup).
-// One targeted call against those two chapters is faster, cheaper, and more reliable
-// than running the 18-chapter loop and de-duping.
+// === BOOK-SPECIFIC TARGETED EXTRACTION ===
+// Ostrom's 8 principles live almost entirely in Bollier's Ch. 2 (with Ch. 1
+// setup). One targeted call against those two chapters is faster, cheaper,
+// and more reliable than running the 18-chapter loop and de-duping.
+// For a different book without an equivalent fixed-cardinality catalog,
+// drop this function entirely.
 async function extractOstromTargeted(chunks: { chapterLabel: string; text: string }[]): Promise<any[]> {
   console.log(`\n=== Extracting ostrom (targeted: Ch. 1 + Ch. 2) ===`);
   const cachePath = join(CACHE_DIR, 'ostrom', 'targeted.json');
@@ -539,7 +300,8 @@ ${combinedText}
 
 Extract Elinor Ostrom's 8 design principles for durable commons (introduced in Ch. 2). There are exactly 8. For each principle: include 3-5 diagnostic questions an MCP user could answer to assess whether their commons embodies it, plus 2-4 example_commons_ids drawn from this book (use kebab-case IDs you'd assign — e.g., "erakulapally-seed-sharing", "wolfpak-surfers", "torbel-alpine-commons", "huerta-irrigation-spain", "linux-kernel-development").`;
 
-  const entries = await callExtraction(TOOLS.ostrom, userContent);
+  const result = await callTool(config, TOOLS.ostrom, userContent);
+  const entries = Array.isArray(result?.entries) ? result.entries : [];
   mkdirSync(join(CACHE_DIR, 'ostrom'), { recursive: true });
   writeFileSync(cachePath, JSON.stringify(entries, null, 2));
   console.log(`  ${entries.length} principles extracted (expected 8)`);
@@ -564,27 +326,23 @@ async function main() {
 
   const t0 = Date.now();
 
-  // Run catalogs sequentially — within each catalog, chapters run 4-way concurrent.
-  // (Sequential across catalogs keeps the cache breakpoints clean and predictable.)
   const heavyCatalogs: Catalog[] = ['commons', 'enclosures', 'strategies', 'glossary', 'quotes'];
   const results: Record<Catalog, any[]> = {} as any;
 
   for (const cat of heavyCatalogs) {
-    results[cat] = await extractCatalog(cat, chunks);
+    results[cat] = await extractCatalog(config, cat, chunks);
     if (DEDUP_CATALOGS.has(cat)) {
-      results[cat] = await dedupCatalog(cat, results[cat]);
+      results[cat] = await dedupCatalog(config, cat, results[cat]);
     }
   }
   results.ostrom = await extractOstromTargeted(chunks);
 
-  // Write data files
   for (const cat of ['commons', 'enclosures', 'strategies', 'ostrom', 'glossary', 'quotes'] as Catalog[]) {
     const filePath = join(DATA_DIR, `${cat}.ts`);
     writeFileSync(filePath, FILE_HEADERS[cat] + JSON.stringify(results[cat], null, 2) + ';\n');
     console.log(`Wrote ${filePath} (${results[cat].length} entries)`);
   }
 
-  // Write data/index.ts re-exports
   const indexContent = `export { COMMONS } from './commons.js';
 export { ENCLOSURES } from './enclosures.js';
 export { STRATEGIES } from './strategies.js';
