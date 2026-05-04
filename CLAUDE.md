@@ -33,7 +33,9 @@ src/
     └── quotes.ts      # ~30-60 themed grounding passages
 
 scripts/
-└── extract-data.ts    # Claude-powered chapter-by-chapter extraction
+├── extract-data.ts        # Claude-powered chapter-by-chapter extraction
+├── smoke-fixes.mjs        # Stdio regression test (run after build)
+└── smoke-fixes-prod.mjs   # HTTP transport smoke against the Railway deploy
 ```
 
 ## Tool groups (12 total)

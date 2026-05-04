@@ -70,6 +70,8 @@ Source: TypeScript ESM, `@modelcontextprotocol/sdk`, `zod`. Stack documented in 
 
 Catalogs are extracted from the source markdown via `npm run extract` (requires `ANTHROPIC_API_KEY` in `.env`). Re-runs are idempotent in shape; IDs may drift slightly across runs.
 
+Smoke tests live in `scripts/`: `smoke-fixes.mjs` runs against a local stdio build (`npm run build && node scripts/smoke-fixes.mjs`) for regression coverage; `smoke-fixes-prod.mjs` hits the Railway HTTP transport for post-deploy verification.
+
 ## Related
 
 Sibling commons-themed MCPs in development: Plurality (Weyl & Tang), Governable Spaces (Schneider). All under the [book-power](https://github.com/zhiganov/book-power) umbrella.
