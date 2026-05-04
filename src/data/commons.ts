@@ -3,6 +3,7 @@ import type { Commons } from '../types.js';
 export const COMMONS: Commons[] = [
   {
     "id": "commons-washing-anti-pattern",
+    "kind": "anti-pattern",
     "name": "Commons-Washing",
     "domain": "knowledge/digital",
     "brief": "Trend-conscious corporations wrap themselves in the language of 'commons' to signal authenticity and street credibility while continuing extractive, market-driven practices — a form of brand capture that hollows out the concept.",
@@ -19,6 +20,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "neoliberal-enclosure-global-pattern",
+    "kind": "enclosure",
     "name": "Neoliberal Enclosure: Global Extraction and Financialization",
     "domain": "land",
     "brief": "The global market system systematically privatizes and plunders shared wealth — land, forests, water, genes, seeds, knowledge, creativity, and personal data — displacing costs and risks onto households, communities, ecosystems, and future generations, now supercharged by financialization, authoritarian politics, and AI.",
@@ -35,6 +37,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "commons-as-social-system-not-resource",
+    "kind": "commons",
     "name": "Commons as Living Social System (Not a Resource)",
     "domain": "social/mutual_aid",
     "brief": "A foundational perspectival shift: the commons is not merely a resource or a 'thing' to be managed, as conventional economists frame it, but a deeply relational, living social organism that itself generates value through commoning.",
@@ -51,6 +54,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "parallel-polis-commoning-strategy",
+    "kind": "commons",
     "name": "Parallel Polis: Building Outside the Market/State System",
     "domain": "social/mutual_aid",
     "brief": "Faced with the totalizing power of state-backed capital accumulation, commoners increasingly pursue a strategy of building functional 'islands of coherence' outside the market/state system — a parallel polis — rather than only fighting enclosures from within.",
@@ -67,6 +71,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "creative-commons-licenses",
+    "kind": "commons",
     "name": "Creative Commons Licensing System",
     "domain": "knowledge/digital",
     "brief": "A legal infrastructure enabling billions of books, articles, images, and music to be made shareable, creating a knowledge commons outside proprietary IP regimes.",
@@ -83,6 +88,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "wikipedia-knowledge-commons",
+    "kind": "commons",
     "name": "Wikipedia",
     "domain": "knowledge/digital",
     "brief": "A collaboratively produced, freely accessible encyclopedia representing one of the largest open knowledge commons in existence.",
@@ -98,6 +104,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "open-source-software-commons",
+    "kind": "commons",
     "name": "Open-Source Software Commons",
     "domain": "knowledge/digital",
     "brief": "Collaboratively developed software whose source code is freely shared, modified, and redistributed, constituting a major knowledge and digital commons.",
@@ -113,6 +120,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "community-supported-agriculture",
+    "kind": "commons",
     "name": "Community Supported Agriculture (CSA)",
     "domain": "food/seed",
     "brief": "A model in which community members directly support local farms through advance subscriptions, building a food commons that bypasses industrial supply chains.",
@@ -128,6 +136,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "community-land-trusts",
+    "kind": "commons",
     "name": "Community Land Trusts (CLTs)",
     "domain": "urban",
     "brief": "Nonprofit organizations that acquire and steward land on behalf of a community, removing it from speculative markets to ensure long-term affordability and community benefit.",
@@ -143,6 +152,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "blood-donation-gift-economy",
+    "kind": "commons",
     "name": "Blood Donation Gift Economy",
     "domain": "social/mutual_aid",
     "brief": "Voluntary blood donation systems that operate as a gift economy, sustaining a medical commons outside market exchange.",
@@ -158,6 +168,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "mutual-aid-networks",
+    "kind": "commons",
     "name": "Mutual Aid Networks",
     "domain": "social/mutual_aid",
     "brief": "Community-organized systems of reciprocal support that provide goods, services, and care outside market or state provision.",
@@ -173,6 +184,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "indigenous-commitment-pooling",
+    "kind": "commons",
     "name": "Indigenous Commitment-Pooling Traditions",
     "domain": "social/mutual_aid",
     "brief": "Traditional Indigenous practices of pooling commitments and resources within communities, representing long-standing forms of the commons rooted in relational obligation.",
@@ -188,6 +200,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "coastal-fisheries-self-governance",
+    "kind": "commons",
     "name": "Coastal Fisheries Managed by Fishers",
     "domain": "water",
     "brief": "Fisheries governed directly by coastal fishing communities through self-organized rules, representing a living commons that prevents overextraction.",
@@ -203,6 +216,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "alternative-local-currencies",
+    "kind": "commons",
     "name": "Alternative Local Currencies",
     "domain": "money/finance",
     "brief": "Community-issued currencies that circulate within a local economy, building economic resilience and a financial commons outside the banking system.",
@@ -218,6 +232,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "makerspaces-commons",
+    "kind": "commons",
     "name": "Makerspaces",
     "domain": "knowledge/digital",
     "brief": "Shared workshops and fabrication spaces where community members collaboratively access tools, skills, and equipment as a commons.",
@@ -233,6 +248,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "mesh-network-wifi-commons",
+    "kind": "commons",
     "name": "Mesh Network WiFi Systems",
     "domain": "knowledge/digital",
     "brief": "Community-built wireless internet infrastructure that provides shared connectivity as a commons, outside corporate telecom control.",
@@ -248,6 +264,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "platform-cooperatives",
+    "kind": "commons",
     "name": "Platform Cooperatives",
     "domain": "labor",
     "brief": "Worker- or user-owned digital platforms that operate as a commons-based alternative to extractive gig-economy corporations.",
@@ -263,6 +280,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "language-as-commons",
+    "kind": "commons",
     "name": "Language as Commons",
     "domain": "cultural",
     "brief": "Language — its letters, words, and structures — is a cultural commons freely available to all, though increasingly threatened by trademark enclosure of words and letters.",
@@ -279,6 +297,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "urban-parks-commons",
+    "kind": "commons",
     "name": "Urban Parks as Social Commons",
     "domain": "urban",
     "brief": "Public parks function as social commons where strangers mingle, community bonds form, and shared public life is enacted outside market exchange.",
@@ -294,6 +313,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "market-state-duopoly-antipattern",
+    "kind": "anti-pattern",
     "name": "Market/State Duopoly (Anti-Pattern: Enclosure of the Political Imagination)",
     "domain": "social/mutual_aid",
     "brief": "The tight alliance of market and state around shared commitments to technological progress, corporate dominance, and economic growth that forecloses commons-based alternatives and constitutes a structural enclosure of political imagination.",
@@ -310,6 +330,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "commoning-as-parallel-economy",
+    "kind": "commons",
     "name": "Commoning as Parallel Economy and Social Order",
     "domain": "social/mutual_aid",
     "brief": "The ensemble of real-life commons constitutes a parallel economy and social order that integrates economic production, social cooperation, personal participation, and ethical idealism outside the market/state duopoly.",
@@ -326,6 +347,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "erakulapally-seed-sharing",
+    "kind": "commons",
     "name": "Erakulapally Seed-Sharing Commons (Andhra Pradesh)",
     "domain": "food/seed",
     "brief": "Five thousand dalit women across seventy-five villages in Andhra Pradesh revived traditional biodiverse millet-based agriculture through a seed-sharing commons, achieving food sovereignty without GMO seeds, pesticides, or outside experts.",
@@ -343,6 +365,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "gnu-linux-commons",
+    "kind": "commons",
     "name": "GNU/Linux Free Software Commons",
     "domain": "knowledge/digital",
     "brief": "Starting in 1991, Linus Torvalds and a self-organized global community of hackers collaboratively built GNU/Linux, demonstrating that commons-based peer production can create complex, widely used software without corporate payroll or proprietary control.",
@@ -360,6 +383,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "wolfpak-surfers-pipeline",
+    "kind": "commons",
     "name": "Wolfpak Surfing Commons — Banzai Pipeline, North Shore Oahu",
     "domain": "cultural",
     "brief": "The Wolfpak is a self-organized collective of local surfers on the North Shore of Oahu who govern access to the scarce, dangerous big waves at Banzai Pipeline Beach through their own social code of surfing etiquette, enforcing rules and punishing violators without state authority.",
@@ -377,6 +401,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "boston-snow-parking-commons",
+    "kind": "commons",
     "name": "Boston Winter Parking Commons",
     "domain": "urban",
     "brief": "Residents of certain Boston neighborhoods have developed a vernacular commons for managing scarce on-street parking during snowstorms: whoever shovels out a space earns the right to hold it, marked by a folding chair, until the snow melts.",
@@ -394,6 +419,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "hardin-tragedy-myth",
+    "kind": "anti-pattern",
     "name": "Hardin's 'Tragedy of the Commons' — The Founding Misdiagnosis",
     "domain": "land",
     "brief": "Garrett Hardin's 1968 essay described an unmanaged open-access pasture as a 'commons' and concluded collective resource management inevitably ends in ruin — a foundational misreading that has been used to justify privatization and enclosure for decades.",
@@ -411,6 +437,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "ostrom-design-principles-cpr",
+    "kind": "commons",
     "name": "Ostrom's Design Principles for Governing the Commons",
     "domain": "land",
     "brief": "Elinor Ostrom's empirical fieldwork across fisheries, grazing lands, and groundwater systems produced a landmark set of design principles showing that communities can and do govern shared resources sustainably without privatization or top-down state control.",
@@ -428,6 +455,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "torbel-swiss-alpine-commons",
+    "kind": "commons",
     "name": "Törbel Alpine Commons (Switzerland)",
     "domain": "land",
     "brief": "The villagers of Törbel, Switzerland, have collectively managed high alpine forests, meadows, and irrigation waters since 1224 — one of Ostrom's canonical examples of a durable, self-governed commons.",
@@ -443,6 +471,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "spanish-huerta-irrigation-commons",
+    "kind": "commons",
     "name": "Spanish Huerta Irrigation Commons",
     "domain": "water",
     "brief": "Communities in Spain have shared scarce irrigation waters through huerta social institutions for centuries, demonstrating that long-running, self-governed water commons are viable alternatives to privatization.",
@@ -457,6 +486,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "los-angeles-groundwater-commons",
+    "kind": "commons",
     "name": "Los Angeles Groundwater Management Commons",
     "domain": "water",
     "brief": "In the 1960s, diverse water authorities in Los Angeles learned to coordinate management of scarce groundwater supplies, illustrating polycentric governance of a large-scale urban water commons.",
@@ -471,6 +501,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "homo-economicus-anti-pattern",
+    "kind": "anti-pattern",
     "name": "Homo Economicus — The Market-Mind Anti-Pattern",
     "domain": "knowledge/digital",
     "brief": "The fictional abstract individual of neoclassical economics — a self-maximizing rational agent — is the ideological foil against which the commons paradigm defines itself; its dominance in mainstream economics has systematically obscured cooperative, relational, and commoning behaviors.",
@@ -487,6 +518,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "happy-birthday-copyright-enclosure",
+    "kind": "enclosure",
     "name": "\"Happy Birthday\" Copyright Enclosure",
     "domain": "cultural",
     "brief": "Warner Music Group claimed copyright over \"Happy Birthday to You\" for 157 years, extracting ~$2 million/year in royalties from a song whose entire commercial value derived from free communal circulation across generations.",
@@ -504,6 +536,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "ascap-summer-camp-copyright-threat",
+    "kind": "commons",
     "name": "ASCAP Threat Against Children's Summer Camps",
     "domain": "cultural",
     "brief": "In 1996, ASCAP threatened dozens of children's summer camps with legal action for singing copyrighted songs around campfires, demanding $1,200 per camp per season — treating communal singing as a commercial public performance.",
@@ -520,6 +553,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "cultural-commons-creativity-borrowing",
+    "kind": "commons",
     "name": "Intergenerational Cultural Commons of Creativity",
     "domain": "cultural",
     "brief": "Human culture has always functioned as a commons of shared creativity — imitation, extension, and transformation of earlier works — exemplified by jazz, blues, hip-hop, Shakespeare, Woody Guthrie, and countless others.",
@@ -537,6 +571,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "copyright-term-extension-enclosure",
+    "kind": "enclosure",
     "name": "Copyright Term Extension as Systematic Enclosure",
     "domain": "cultural",
     "brief": "Repeated extensions of copyright terms — now life-plus-70-years — and the 1976 automatic-copyright law have systematically enclosed the creative commons by making all works born into private property and keeping them there for over a century.",
@@ -552,6 +587,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "big-tech-proprietary-platform-enclosure",
+    "kind": "enclosure",
     "name": "Big Tech Proprietary Platform Enclosure of Digital Commons",
     "domain": "knowledge/digital",
     "brief": "Facebook, YouTube, Twitter/X, Instagram, and similar platforms enclose digital commons by luring users to share content for free while capturing their data, preventing interoperability, enforcing corporate terms of service, and monetizing users through surveillance advertising.",
@@ -569,6 +605,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "apple-app-store-chokepoint-capitalism",
+    "kind": "commons",
     "name": "Apple App Store Chokepoint Capitalism",
     "domain": "knowledge/digital",
     "brief": "Apple's App Store exemplifies 'chokepoint capitalism': it invites wide network participation while maintaining monopoly control, forcing app developers to surrender 30% of revenues and lifetime earnings as the price of access to the platform's user base.",
@@ -584,6 +621,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "trademark-law-cultural-enclosure",
+    "kind": "enclosure",
     "name": "Trademark Law as Cultural Commons Enclosure",
     "domain": "cultural",
     "brief": "Corporations like Mattel (Barbie), McDonald's (the 'Mc' prefix), and NBC (three-note chime) use trademark law offensively to control public culture, suppress parody and criticism, and claim ownership over shared linguistic and cultural elements.",
@@ -599,6 +637,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "university-as-constructed-cultural-commons",
+    "kind": "commons",
     "name": "The University as Constructed Cultural Commons",
     "domain": "knowledge/digital",
     "brief": "The university is a 'constructed cultural commons' — a federated ecosystem of departments, libraries, seminars, and peer review that generates and stewards knowledge through nonmarket relationships of trust, reciprocity, and open sharing.",
@@ -616,6 +655,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "bayh-dole-academic-commons-enclosure",
+    "kind": "enclosure",
     "name": "Bayh–Dole Act: Enclosure of Publicly Funded Research",
     "domain": "knowledge/digital",
     "brief": "The 1976 Chakrabarty ruling and the 1980 Bayh–Dole Act authorized universities to patent publicly funded research, enabling corporations to colonize academic commons, privatize publicly financed drug discoveries, and corrupt scholarly norms through patent thickets and proprietary secrecy.",
@@ -633,6 +673,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "patent-thickets-tragedy-anticommons",
+    "kind": "anti-pattern",
     "name": "Patent Thickets and the Tragedy of the Anti-Commons",
     "domain": "knowledge/digital",
     "brief": "The fragmentation of research knowledge into dense overlapping patent rights — exemplified by breast-cancer gene patents — creates a 'tragedy of the anti-commons' in which researchers cannot collaborate without risking litigation, stifling innovation and discovery.",
@@ -648,6 +689,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "urban-public-space-corporate-branding-enclosure",
+    "kind": "enclosure",
     "name": "Corporate Branding and Enclosure of Urban Public Spaces",
     "domain": "urban",
     "brief": "The selling of naming rights to sports stadiums, advertising in schools, and conversion of public squares into commercialized zones represents the 'hollowing out' of social identity — eliminating the shared experiences and distinctive places that give cities soul.",
@@ -665,6 +707,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "pulska-grupa-kommunal-urbanism-charter",
+    "kind": "commons",
     "name": "Pulska Grupa Kommunal Urbanism Social Charter",
     "domain": "urban",
     "brief": "Architects and urban planners from Pula, Croatia articulate a commons-based vision of the city as a collective space belonging to all inhabitants — explicitly rejecting the capitalist public/private duopoly and asserting a politics of collective urban subjectivities.",
@@ -681,6 +724,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "internet-net-neutrality-infrastructure-commons",
+    "kind": "commons",
     "name": "Internet as Nondiscriminatory Infrastructure Commons",
     "domain": "knowledge/digital",
     "brief": "Net neutrality policies defend the internet as an open, nondiscriminatory commons by preventing telecom oligopolies from creating 'service tiers' that privilege large corporate users, censor competitors, or balkanize access — following the 'common carriage' tradition.",
@@ -697,6 +741,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "broadcast-spectrum-public-trustee-enclosure",
+    "kind": "enclosure",
     "name": "Broadcast Spectrum: From Public Trustee to Corporate Enclosure",
     "domain": "knowledge/digital",
     "brief": "The US electromagnetic spectrum belongs to the public; broadcasters were originally granted free use in exchange for serving the 'public interest, convenience, and necessity' — but Reagan/Clinton-era deregulation rescinded that obligation, gifting corporations control of a billion-dollar public asset at no cost.",
@@ -712,6 +757,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "infrastructure-privatization-highways-parking",
+    "kind": "enclosure",
     "name": "Wall Street Privatization of Public Infrastructure",
     "domain": "money/finance",
     "brief": "Investors have acquired long-term leases on publicly built highways, bridges, airports, and parking meters — converting taxpayer-funded infrastructure into guaranteed revenue streams while tripling rates, cutting quality, and stripping democratic accountability from public assets.",
@@ -728,6 +774,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "microsoft-os-infrastructure-enclosure",
+    "kind": "enclosure",
     "name": "Microsoft Windows OS: Enclosure of Computing Infrastructure Commons",
     "domain": "knowledge/digital",
     "brief": "Microsoft leveraged 90% control of computer operating systems to force-bundle Office software, dominate desktop applications, stifle competition in word processing and other markets, and lobby against open software standards in government — enclosing computing infrastructure as a corporate moat.",
@@ -743,6 +790,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "starbucks-commodification-coffee-shop-commons",
+    "kind": "enclosure",
     "name": "Starbucks and the Commodification of the Coffee Shop Commons",
     "domain": "urban",
     "brief": "Starbucks' aggressive expansion and efficiency-driven branding eroded the social conviviality, local character, and 'romance and theater' of the coffee shop — illustrating how market enclosure of communal social spaces produces sterile monoculture even by the corporation's own admission.",
@@ -759,6 +807,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "acequias-new-mexico",
+    "kind": "commons",
     "name": "New Mexico Acequias",
     "domain": "water",
     "brief": "Community-managed irrigation waterways governed by native Hispanic-Americans in New Mexico since the 1600s, legally sanctioned by state law but self-governed by commoners who allocate water fairly while conserving soils and aquifers.",
@@ -776,6 +825,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "potato-park-peru",
+    "kind": "commons",
     "name": "Potato Park (Indigenous Biocultural Heritage Area), Peru",
     "domain": "food/seed",
     "brief": "A landscape conservation commons in the Andes created in the 2000s where seven thousand villagers from six Indigenous communities jointly steward over nine hundred native potato varieties against enclosure by transnational ag-biotech firms seeking patents.",
@@ -793,6 +843,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "traditional-knowledge-digital-library-india",
+    "kind": "commons",
     "name": "Traditional Knowledge Digital Library (TKDL), India",
     "domain": "knowledge/digital",
     "brief": "A database compiled by Indian commoners documenting public-domain traditional medical knowledge to proactively defend against biopiracy — corporate patent applications that would privatize community knowledge of plants and medicinal treatments.",
@@ -809,6 +860,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "mutual-aid-covid-networks",
+    "kind": "commons",
     "name": "Covid-Era Mutual Aid Networks",
     "domain": "social/mutual_aid",
     "brief": "Spontaneous, peer-organized local mutual aid networks that emerged during the Covid pandemic to provide care, goods, and services where the state and corporate markets failed, demonstrating the speed, flexibility, and resilience of decentralized commoning.",
@@ -825,6 +877,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "blood-organ-donation-gift-economy",
+    "kind": "commons",
     "name": "Blood and Organ Donation Gift Economies",
     "domain": "social/mutual_aid",
     "brief": "Voluntary community systems for donating blood and organs that function as gift economies, outperforming market-based alternatives in ethical integrity and quality precisely because the logic of gift — not price — governs the exchange.",
@@ -840,6 +893,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "academic-discipline-gift-economy",
+    "kind": "commons",
     "name": "Academic Disciplines as Gift Economies",
     "domain": "knowledge/digital",
     "brief": "Academic disciplines function as highly productive commons and gift economies in which researchers share knowledge, peer review, and scholarship as contributions to the field rather than products, hosted by universities as shared infrastructure.",
@@ -855,6 +909,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "couchsurfing-gift-economy",
+    "kind": "commons",
     "name": "CouchSurfing (Original Gift Economy, early 2000s)",
     "domain": "social/mutual_aid",
     "brief": "A volunteer-run web service enabling millions of travelers to exchange free overnight hospitality across 97,000 cities worldwide via a pay-it-forward gift economy — until investors enclosed it as a for-profit subscription business, illustrating the vulnerability of digital gift economies to capitalist capture.",
@@ -871,6 +926,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "bangla-pesa-kenya",
+    "kind": "commons",
     "name": "Bangla-Pesa Community Currency, Mombasa, Kenya",
     "domain": "money/finance",
     "brief": "A mutual credit voucher system created by Grassroots Economics in Mombasa allowing community members to issue and circulate vouchers for goods and services they provide, enabling local exchange outside capitalist finance — scaled to 218 businesses and 87,000 vouchers by 2024.",
@@ -888,6 +944,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "roscas-black-women-diaspora",
+    "kind": "commons",
     "name": "ROSCAs (Rotating Savings and Credit Associations) — Black Women's Diaspora Finance",
     "domain": "money/finance",
     "brief": "Peer-based, informal savings and credit commons — known as susu, partner, meeting-turn, box-hand, sol, and other names — through which Black women in Africa, the Caribbean, and North America collectively pool financial resources to meet major expenses, avoid racist banking systems, and build political empowerment.",
@@ -905,6 +962,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "time-banking-communities",
+    "kind": "commons",
     "name": "Time Banking / Time Dollar Networks",
     "domain": "social/mutual_aid",
     "brief": "Localized time-barter systems operating in dozens of cities worldwide, allowing people to earn 'time credits' for services rendered to community members and spend them on services from others, particularly benefiting elderly and low-income people with more time than money.",
@@ -920,6 +978,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "berkshares-local-currency",
+    "kind": "commons",
     "name": "BerkShares Complementary Currency, Massachusetts",
     "domain": "money/finance",
     "brief": "A complementary local currency circulating in the Berkshires region of Massachusetts, overseen by the Schumacher Center for a New Economics, that bolsters local economies, builds regional identity, and prevents financial outflows to distant banks — with over $10 million circulated across 19 years.",
@@ -936,6 +995,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "black-cooperatives-us",
+    "kind": "commons",
     "name": "Black Cooperatives in the United States",
     "domain": "labor",
     "brief": "A long tradition of African American cooperative enterprises used to survive white supremacist economic exclusion, build solidarity, and advance collective freedom across domains from food and housing to credit, education, burial, and employment.",
@@ -952,6 +1012,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "medieval-land-commons-feudalism",
+    "kind": "commons",
     "name": "Medieval English Land Commons under Feudalism",
     "domain": "land",
     "brief": "Shared pastures, forests, fields, and waterways used by English villagers for subsistence under feudal tenure, providing firewood, thatch, grazing, and food—until systematically enclosed by lords, gentry, and Parliament from the 16th through 19th centuries.",
@@ -969,6 +1030,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "english-enclosure-movement",
+    "kind": "enclosure",
     "name": "English Enclosure Movement (Anti-Pattern: Enclosure as Class War)",
     "domain": "land",
     "brief": "Over roughly 150 years (late 1600s–mid-1800s), approximately one-seventh of all English common land was seized by lords, gentry, and Parliament, destroying subsistence commons, proletarianizing commoners, and laying foundations for industrial capitalism. Bollier frames this as a 'revolution of the rich against the poor' (Polanyi).",
@@ -986,6 +1048,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "charter-of-the-forest-1217",
+    "kind": "commons",
     "name": "Charter of the Forest (1217)",
     "domain": "land",
     "brief": "A companion document to the Magna Carta, signed in 1217, that gave English commoners formal written rights to use royal forests for subsistence — including pannage, estover, agistment, and turbary — representing one of the earliest state recognitions of commons rights.",
@@ -1002,6 +1065,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "roman-res-communes-public-trust",
+    "kind": "commons",
     "name": "Roman Res Communes and the Public Trust Doctrine",
     "domain": "water",
     "brief": "Emperor Justinian's Institutes (534 AD) codified res communes — air, running water, the sea, rivers, and shorelines as property common to all mankind by natural law — establishing the legal ancestor of the modern public trust doctrine, which obliges the state to steward these resources for present and future generations and forbids their privatization.",
@@ -1019,6 +1083,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "vernacular-commons-law",
+    "kind": "commons",
     "name": "Vernacular / Customary Law of the Commons",
     "domain": "social/mutual_aid",
     "brief": "The informal, oral, and socially embedded body of law that communities create to govern shared resources — predating and running parallel to formal written state law — which derives its legitimacy from grounded social practice, custom, and lived experience rather than legislatures or courts.",
@@ -1036,6 +1101,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "mutual-aid-evolutionary-basis",
+    "kind": "commons",
     "name": "Mutual Aid and Evolutionary Cooperation (Kropotkin / Nowak / E.O. Wilson)",
     "domain": "social/mutual_aid",
     "brief": "Drawing on Kropotkin's 1902 Mutual Aid and contemporary evolutionary science (Nowak, E.O. Wilson, D.S. Wilson), Bollier argues that human cooperation, reciprocity, and group-level selection are biologically encoded and as foundational to evolution as competitive individualism — directly undercutting the Homo economicus premise of market economics.",
@@ -1053,6 +1119,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "polanyi-great-transformation-fictional-commodities",
+    "kind": "anti-pattern",
     "name": "Polanyi's Fictional Commodities and the Market Transformation (Anti-Pattern)",
     "domain": "money/finance",
     "brief": "Karl Polanyi's analysis in The Great Transformation (1944) shows how land, labor, and money were redefined as 'fictional commodities' to serve industrial capitalism — dissolving commons-based economies of reciprocity, redistribution, and householding and replacing them with market price logic. Bollier uses this as a foundational anti-pattern for understanding enclosure.",
@@ -1069,6 +1136,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "state-trustee-commons-concept",
+    "kind": "commons",
     "name": "State Trustee Commons (Concept)",
     "domain": "land",
     "brief": "Bollier's framing that large-scale, state-mediated management of public assets (air, water, public lands, coastal areas, wildlife) constitutes a form of commons — where the state acts not as owner but as fiduciary and administrative agent of the people, bound by the public trust doctrine.",
@@ -1085,6 +1153,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "witches-women-commoning-federici",
+    "kind": "enclosure",
     "name": "Women Commoners and Witch-Hunting as Enclosure Enforcement (Federici)",
     "domain": "social/mutual_aid",
     "brief": "Drawing on Silvia Federici's Caliban and the Witch, Bollier highlights how women who maintained customary commoning practices during the transition to capitalism were accused of witchcraft — revealing that enclosure was also a gendered assault on those most dependent on the commons for subsistence, autonomy, and sociality.",
@@ -1101,6 +1170,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "commons-nested-in-systems-of-power",
+    "kind": "commons",
     "name": "Commons Nested Within Larger Systems of Power",
     "domain": "social/mutual_aid",
     "brief": "Bollier's structural observation that commons are rarely sovereign or dominant institutional forms — they typically survive in the interstices of feudal, capitalist, or state power, thriving in 'protected zones' tolerated or overlooked by Power, creating ongoing creative tension between commoning logic and the imperatives of the host system.",
@@ -1118,6 +1188,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "triad-of-commoning-social-life",
+    "kind": "commons",
     "name": "Triad of Commoning — Social Life Sphere",
     "domain": "social/mutual_aid",
     "brief": "The Social Life sphere of Bollier and Helfrich's Triad of Commoning names the relational patterns—shared purpose, ritualized togetherness, and free contribution—that hold a commons together as a living community.",
@@ -1134,6 +1205,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "triad-of-commoning-peer-governance",
+    "kind": "commons",
     "name": "Triad of Commoning — Peer Governance Sphere",
     "domain": "social/mutual_aid",
     "brief": "The Peer Governance sphere of the Triad of Commoning describes the patterns by which commoners share decision-making power as equals, circulate knowledge generously, maintain trust-based transparency, and keep market forces at arm's length.",
@@ -1151,6 +1223,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "triad-of-commoning-provisioning",
+    "kind": "commons",
     "name": "Triad of Commoning — Provisioning Sphere",
     "domain": "social/mutual_aid",
     "brief": "The Provisioning sphere of the Triad of Commoning describes how commoners produce what they need through 'Do It Together' (DIT) practices, shared risk, distributed structures, and creative adaptation — integrating economic life with personal and communal life rather than producing for the market.",
@@ -1168,6 +1241,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "ontoshift-relational-commons-framing",
+    "kind": "commons",
     "name": "The OntoShift: From Resource Management to Relational Commons",
     "domain": "knowledge/digital",
     "brief": "Bollier and Helfrich name the 'OntoShift' as a necessary shift in ontology and epistemology — from the Enlightenment mechanistic worldview that sees isolated individuals and things to a relational worldview that sees commons as living systems shaped by interdependence, symbiosis, and meaning-making.",
@@ -1184,6 +1258,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "pattern-language-methodology-commoning",
+    "kind": "commons",
     "name": "Pattern Language Methodology Applied to Commoning",
     "domain": "knowledge/digital",
     "brief": "Drawing on Christopher Alexander's pattern language framework, Bollier and Helfrich identified several dozen recurring relational patterns observable across diverse commons worldwide, grouped into the Triad of Commoning (Social Life, Peer Governance, Provisioning).",
@@ -1198,6 +1273,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "biopoetics-enlivenment-commons",
+    "kind": "commons",
     "name": "Biopoetics and 'Enlivenment' as Commons Metaphysics",
     "domain": "cultural",
     "brief": "Andreas Weber's 'biopoetics' and his call for an 'Enlivenment' — a departure from the 500-year Enlightenment — grounds the commons in biological evidence that all living systems are meaning-making, relational, and creative, dissolving the supposed opposition between nature and society that market economics relies upon.",
@@ -1214,6 +1290,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "community-land-trust-north-america",
+    "kind": "commons",
     "name": "Community Land Trusts (CLTs)",
     "domain": "land",
     "brief": "Democratically run, regionally based nonprofits that take land off the market in perpetuity and manage it for community benefit, including affordable housing, sustainable agriculture, and local business preservation.",
@@ -1231,6 +1308,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "agrarian-trust-terre-de-liens",
+    "kind": "commons",
     "name": "Agrarian Trust (US) & Terre de Liens (France) — Agrarian Commons",
     "domain": "land",
     "brief": "Organizations that convert privately owned farms into community-owned 'agrarian commons,' enabling farmers — especially younger ones — to access land without the burden of speculative purchase prices.",
@@ -1246,6 +1324,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "community-supported-agriculture-csa",
+    "kind": "commons",
     "name": "Community Supported Agriculture (CSA)",
     "domain": "food/seed",
     "brief": "A commons-based arrangement in which community members buy upfront shares in a farm's seasonal harvest, sharing both the risks and the benefits of local agriculture with farmers.",
@@ -1263,6 +1342,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "pioneer-valley-jazz-shares",
+    "kind": "commons",
     "name": "Pioneer Valley Jazz Shares",
     "domain": "cultural",
     "brief": "A community-supported concert series in western Massachusetts that applies CSA principles to jazz, allowing fans to buy upfront seasonal subscriptions that fund world-class live music without institutional support.",
@@ -1277,6 +1357,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "cape-anne-fresh-catch-fishery",
+    "kind": "commons",
     "name": "Cape Anne Fresh Catch (Community-Supported Fishery)",
     "domain": "food/seed",
     "brief": "A community-supported fishery in Gloucester, Massachusetts, applying CSA upfront-share principles to local fishing, connecting community members directly with local fishers.",
@@ -1291,6 +1372,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "community-owned-forests",
+    "kind": "commons",
     "name": "Community-Owned Forests",
     "domain": "land",
     "brief": "Commons where people in a region collectively manage large tracts of forest for community benefit — prioritizing trails, recreation, and sustainable lumber — rather than ceding land for commercial profit.",
@@ -1306,6 +1388,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "food-commons-fresno",
+    "kind": "commons",
     "name": "Food Commons Fresno",
     "domain": "food/seed",
     "brief": "A California-based project using trust structures to capture agricultural surpluses for community benefit rather than investor return, enabling higher quality food, better worker wages, and mutualized gains.",
@@ -1321,6 +1404,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "mutual-credit-timebanking",
+    "kind": "commons",
     "name": "Mutual Credit and Timebanking Systems",
     "domain": "money/finance",
     "brief": "Community exchange systems that allow marginalized communities to meet needs using neighborhood currencies or credit vouchers, enabling goods and services to circulate independently of national currency.",
@@ -1336,6 +1420,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "solar-commons-minnesota-arizona",
+    "kind": "commons",
     "name": "Solar Commons (Minnesota & Arizona)",
     "domain": "energy",
     "brief": "Community trust-managed solar energy projects that use revenue streams from solar arrays to build community wealth, bringing together diverse stakeholders including landowners, nonprofits, immigrant farmers, and Native American tribes.",
@@ -1351,6 +1436,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "barcelona-en-comu-commons-city",
+    "kind": "commons",
     "name": "Barcelona En Comú — Commons Collaborative Economy",
     "domain": "urban",
     "brief": "A housing activist movement and political party that won Barcelona's mayoralty in 2015 and set a global standard for city/commons collaboration, including social housing, open-source governance, community WiFi, and renewable energy cooperatives.",
@@ -1367,6 +1453,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "guifi-net-barcelona-wifi",
+    "kind": "commons",
     "name": "Guifi.net (Community WiFi Network, Barcelona)",
     "domain": "knowledge/digital",
     "brief": "A homegrown, commons-managed WiFi system in Catalonia providing better broadband service at lower prices than commercial alternatives to more than 36,000 subscribers, supported by the city of Barcelona.",
@@ -1382,6 +1469,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "som-energia-coop-catalonia",
+    "kind": "commons",
     "name": "Som Energia Coop (Catalonia's Renewable Energy Cooperative)",
     "domain": "energy",
     "brief": "Catalonia's first renewable energy cooperative, supported by the Barcelona city government as part of its commons collaborative economy, providing member-owned renewable energy.",
@@ -1396,6 +1484,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "labgov-co-city-protocol-bologna",
+    "kind": "commons",
     "name": "LabGov & the Co-City Protocol (Bologna)",
     "domain": "urban",
     "brief": "An Italian initiative that formalizes city/commons partnerships through the 'Co-City Protocol,' enabling citizen groups and local governments to co-produce urban commons such as parent-run kindergartens and urban agricultural cooperatives.",
@@ -1413,6 +1502,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "nyc-community-gardens-green-guerillas",
+    "kind": "commons",
     "name": "New York City Community Gardens (Green Guerillas)",
     "domain": "urban",
     "brief": "Self-organized 'green guerillas' in 1980s New York who seized abandoned rubble-strewn lots and transformed them into community gardens, acting autonomously in response to government apathy.",
@@ -1429,6 +1519,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "city-repair-portland-intersection-painting",
+    "kind": "commons",
     "name": "City Repair Project (Portland, Oregon)",
     "domain": "urban",
     "brief": "A citizen-led Portland initiative that reclaimed streets through 'intersection painting' to help residents beautify neighborhoods, later expanding to build homeless housing and teach urban permaculture.",
@@ -1444,6 +1535,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "mietshaeuser-syndikat-germany",
+    "kind": "commons",
     "name": "Mietshäuser Syndikat (Germany)",
     "domain": "urban",
     "brief": "A German federation of 177 resident-managed residential real estate projects where commoners collectively own all buildings, pay non-market 'rent' to themselves for maintenance, and use high legal barriers to prevent sale — with a 'pay it forward' fund to acquire more buildings.",
@@ -1461,6 +1553,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "makerspaces-fab-labs-urban",
+    "kind": "commons",
     "name": "Makerspaces and Fab Labs",
     "domain": "knowledge/digital",
     "brief": "Commons-based open workspaces filled with tools, machines, and experienced tech experts where anyone can tinker, invent, and learn informally, guided by the ethic 'think it, make it, share it,' often addressing local problems.",
@@ -1476,6 +1569,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "mutual-aid-networks-covid-urban",
+    "kind": "commons",
     "name": "Mutual Aid Networks (Urban Commons)",
     "domain": "social/mutual_aid",
     "brief": "Spontaneously organized volunteer networks that provide social services, emergency support, groceries, medicines, and health care to vulnerable community members — especially evident during the Covid-19 crisis.",
@@ -1492,6 +1586,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "land-back-movement",
+    "kind": "commons",
     "name": "Land Back Movement",
     "domain": "land",
     "brief": "A North American Indigenous movement seeking to reclaim land taken during colonization as a form of reparations, and to restore biodiversity and Indigenous spiritual engagement with landscapes.",
@@ -1507,6 +1602,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "comunalidad-movement-mexico",
+    "kind": "commons",
     "name": "Comunalidad Movement (Global South / Mexico)",
     "domain": "land",
     "brief": "A movement in Mexico and the Global South pursuing community land reclamation and Indigenous ways of living, similar in goals to Land Back, grounding local governance in communal Indigenous principles.",
@@ -1521,6 +1617,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "la-via-campesina-food-sovereignty",
+    "kind": "commons",
     "name": "La Via Campesina — Food Sovereignty",
     "domain": "food/seed",
     "brief": "A global peasant movement championing 'food sovereignty' — the right of people to control production of the food they need for both subsistence and cultural reasons — against neocolonial agribusiness and market enclosure.",
@@ -1536,6 +1633,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "convivial-conservation",
+    "kind": "commons",
     "name": "Convivial Conservation",
     "domain": "land",
     "brief": "A postcapitalist conservation vision proposed by Büscher and Fletcher that rejects both fortress conservation and market-based 'selling nature to save it,' instead grounding conservation in long-lasting community relationships with nature managed as commons, supported by a conservation basic income.",
@@ -1553,6 +1651,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "transition-movement-local-resilience",
+    "kind": "commons",
     "name": "Transition Movement",
     "domain": "social/mutual_aid",
     "brief": "A community movement pioneering local sufficiency in anticipation of Peak Oil and climate disruptions through care networks, repair cafes, free stores, and local currencies.",
@@ -1568,6 +1667,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "bioregional-commons-economics",
+    "kind": "commons",
     "name": "Bioregional Economics and Commons",
     "domain": "land",
     "brief": "A resurgent framework for commons-based local development grounded in the relational life systems — water, soil, flora, fauna, weather — of defined geographic areas, aiming to build regional self-reliance and security.",
@@ -1583,6 +1683,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "community-charters-for-commoning",
+    "kind": "commons",
     "name": "Community Charters for Commoning",
     "domain": "urban",
     "brief": "Documents through which neighborhoods, towns, or cities declare a positive long-term vision and stimulate commoning action on problems that local governments are overriding or ignoring, such as fracking or pollution.",
@@ -1598,6 +1699,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "repair-cafes-freecycle",
+    "kind": "commons",
     "name": "Repair Cafes and Freecycle / Upcycle Projects",
     "domain": "social/mutual_aid",
     "brief": "Volunteer-organized community spaces where tech experts help repair broken appliances and electronics, and where used goods are redistributed to those who need them — embodying gift economy and anti-waste commoning.",
@@ -1613,6 +1715,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "free-software-gpl-commons",
+    "kind": "commons",
     "name": "Free Software / GNU General Public License (GPL) Commons",
     "domain": "knowledge/digital",
     "brief": "Richard Stallman's GPL legally commits software code to a permanent commons by requiring that any derivative work also be GPL-licensed, preventing privatization and ensuring the code remains freely copyable, modifiable, and shareable forever.",
@@ -1630,6 +1733,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "linux-open-source-commons",
+    "kind": "commons",
     "name": "Linux / Open Source Software Commons",
     "domain": "knowledge/digital",
     "brief": "Linux and the broader open source software ecosystem demonstrate that community-built, GPL-licensed software can rival and surpass proprietary products, powering critical global infrastructure while remaining a commons accessible to all.",
@@ -1645,6 +1749,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "wikipedia-digital-knowledge-commons",
+    "kind": "commons",
     "name": "Wikipedia: Global Digital Knowledge Commons",
     "domain": "knowledge/digital",
     "brief": "Wikipedia is a volunteer-built, multilingual online encyclopedia governed as a digital republic — a paradigmatic example of commons-based peer production in which tens of thousands of volunteers collaboratively author and maintain millions of articles without market or state control.",
@@ -1660,6 +1765,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "open-access-academic-publishing",
+    "kind": "commons",
     "name": "Open-Access (OA) Scholarly Publishing Movement",
     "domain": "knowledge/digital",
     "brief": "The OA publishing movement fights to make taxpayer-funded academic research freely and permanently available to all, challenging the enclosure of academic knowledge by commercial publishers who charge exorbitant subscription fees for publicly financed work.",
@@ -1677,6 +1783,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "open-educational-resources",
+    "kind": "commons",
     "name": "Open Educational Resources (OER) Commons",
     "domain": "knowledge/digital",
     "brief": "Open educational resources use CC licensing to make textbooks, curricula, syllabi, and instructional materials freely available, reducing student costs and challenging proprietary textbook publishers who manufacture artificial obsolescence to sustain revenue.",
@@ -1693,6 +1800,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "cosmolocal-production-commons",
+    "kind": "commons",
     "name": "Cosmolocal Production Commons (Farm Hack, Open Prosthetics, Arduino)",
     "domain": "knowledge/digital",
     "brief": "Cosmolocalism combines globally shared open design knowledge with local physical production, enabling farmers, scientists, and hobbyists to collaboratively develop and manufacture equipment, prosthetics, and devices without carbon-intensive supply chains or proprietary corporate control.",
@@ -1709,6 +1817,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "humanitarian-openstreetmap",
+    "kind": "commons",
     "name": "Humanitarian OpenStreetMap Team",
     "domain": "knowledge/digital",
     "brief": "A global community of volunteer hackers who rapidly produce open-licensed online maps of disaster-affected regions, connecting local knowledge on the ground with global technical volunteers to support international humanitarian responders.",
@@ -1724,6 +1833,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "daos-online-commons-governance",
+    "kind": "commons",
     "name": "DAOs (Decentralized Autonomous Organizations) as Commons Governance",
     "domain": "knowledge/digital",
     "brief": "DAOs use blockchain and decentralized software to enable member-owned online organizations with distributed governance, offering promising but contested tools for democratic commoning online — with real risks of devolving into investor partnerships or cryptocurrency speculation.",
@@ -1741,6 +1851,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "commons-friendly-digital-infrastructures",
+    "kind": "commons",
     "name": "Commons-Friendly Digital Infrastructures (Loomio, CoBudget, Open Collective, Holochain)",
     "domain": "knowledge/digital",
     "brief": "A new generation of open source digital tools — for group deliberation, participatory budgeting, financial transparency, timebanking, and peer-to-peer networking — provides the infrastructure commoners need to self-govern without becoming dependent on user-hostile corporate platforms.",
@@ -1757,6 +1868,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "big-tech-platform-enclosure",
+    "kind": "enclosure",
     "name": "Big Tech Platform Enclosure ('Implicit Feudalism' / Enshittification)",
     "domain": "knowledge/digital",
     "brief": "Corporate social media platforms simulate commons but are governed as private fiefdoms — subjecting users to unilateral rule changes, data extraction, and Cory Doctorow's 'enshittification' cycle, in which platforms first woo users then degrade the experience to extract value for investors.",
@@ -1774,6 +1886,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "academic-publisher-enclosure",
+    "kind": "enclosure",
     "name": "Commercial Academic Publisher Enclosure of Knowledge Commons",
     "domain": "knowledge/digital",
     "brief": "Commercial academic publishers (Elsevier, Springer, Wiley) enclose publicly funded research by demanding copyright ownership, then charge universities exorbitant subscription fees — functioning as parasites on academic knowledge commons that was created and paid for by governments, foundations, and taxpayers.",
@@ -1790,6 +1903,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "commons-based-peer-production",
+    "kind": "commons",
     "name": "Commons-Based Peer Production (Benkler)",
     "domain": "knowledge/digital",
     "brief": "Yochai Benkler's concept describes the emergent mode of collaborative, nonproprietary online production — decentralized, not relying on price systems or managerial hierarchies — exemplified by free software, Wikipedia, and the early internet gift economy of research science.",
@@ -1806,6 +1920,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "deck-chair-vernacular-property",
+    "kind": "commons",
     "name": "Cruise Ship Deck Chair Commons",
     "domain": "social/mutual_aid",
     "brief": "Cruise ship passengers informally negotiated shared use of scarce deck chairs through tacit social norms rather than exclusive ownership claims, illustrating how property rights are malleable social conventions.",
@@ -1823,6 +1938,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "lockean-terra-nullius-enclosure",
+    "kind": "enclosure",
     "name": "Terra Nullius / Res Nullius Enclosure Logic",
     "domain": "land",
     "brief": "Locke's labor theory of value treats land managed by Indigenous Peoples as 'empty' and belonging to no one, providing moral cover for colonial and modern enclosures of commons worldwide.",
@@ -1840,6 +1956,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "capitalism-engineering-scarcity",
+    "kind": "commons",
     "name": "Capitalism's Engineering of Scarcity vs. Commons Abundance",
     "domain": "knowledge/digital",
     "brief": "Bollier contrasts capitalism's deliberate manufacture of artificial scarcity (via IP monopolies, sterile GMO seeds, etc.) with the commons approach of engineering renewable abundance for what people actually need.",
@@ -1857,6 +1974,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "odisha-forest-affective-labor",
+    "kind": "commons",
     "name": "Odisha Forest Commons — Affective Labor Stewardship",
     "domain": "land",
     "brief": "Commoners in Odisha, India, sustainably steward local forests through 'affective labor' — traditions, family lives, and personal memories woven into forest care — exemplifying care-wealth rather than resource extraction.",
@@ -1873,6 +1991,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "alaska-native-corporations-enclosure",
+    "kind": "enclosure",
     "name": "Alaska Native Corporations — Enclosure by Commodification",
     "domain": "land",
     "brief": "When Alaskan Indigenous Peoples shifted traditional lands into 'native corporations,' the commodification of sacred inheritances led to mismanagement, corruption, inequality, and dispossession by outside investors — an anti-pattern of commons-to-market conversion.",
@@ -1887,6 +2006,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "gdp-illth-tragedy-of-market",
+    "kind": "anti-pattern",
     "name": "Tragedy of the Market — GDP, Illth, and Commons Externalization",
     "domain": "money/finance",
     "brief": "Bollier names the 'tragedy of the market' as markets' systematic off-loading of unpriced harms ('illth') onto the commons, while GDP counts only monetized value and ignores ecological and social costs.",
@@ -1904,6 +2024,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "inalienability-commons-principle",
+    "kind": "commons",
     "name": "Inalienability as Commons Legal Principle",
     "domain": "land",
     "brief": "Bollier argues that declaring certain shared wealth legally inalienable — permanently off the market — is a more effective strategy than green capitalism or carbon markets for protecting the long-term integrity of commons.",
@@ -1921,6 +2042,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "open-source-seeds-relationalized-property",
+    "kind": "commons",
     "name": "Open Source Seeds — Relationalized Property",
     "domain": "food/seed",
     "brief": "Seed breeders and activists worldwide have created a class of legally 'shareable' seeds protected against patent ownership, preventing multinational corporations from privatizing biowealth and monopolizing seed supplies.",
@@ -1936,6 +2058,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "federated-wiki-relationalized-property",
+    "kind": "commons",
     "name": "Federated Wiki — Relationalized Digital Property",
     "domain": "knowledge/digital",
     "brief": "Ward Cunningham's federated wiki allows each contributor to maintain their own wiki site while structurally interconnecting all sites, enabling both individual voice and collective knowledge commons without suppressing diversity of viewpoints.",
@@ -1951,6 +2074,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "community-land-trusts-relationalized-finance",
+    "kind": "commons",
     "name": "Community Land Trusts — Relationalized Finance",
     "domain": "urban",
     "brief": "Community land trusts pool funds from commoners and allies to provide permanently affordable housing and agriculture, decommodifying land and keeping it inalienable from speculative markets through commons governance.",
@@ -1967,6 +2091,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "csa-farms-relationalized-finance",
+    "kind": "commons",
     "name": "Community-Supported Agriculture (CSA) — Relationalized Finance",
     "domain": "food/seed",
     "brief": "CSA farms use advance commitments from local members to finance organic food production outside conventional market pressures, exemplifying relationalized finance that decommodifies food and builds direct community–farmer relationships.",
@@ -1982,6 +2107,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "platform-cooperatives-relationalized-finance",
+    "kind": "commons",
     "name": "Platform Cooperatives — Relationalized Finance",
     "domain": "labor",
     "brief": "Platform cooperatives allow workers and consumers to mutualize benefits on their own terms via commons governance, bypassing the extractive demands of outside investors and lenders that typify capitalist platform models.",
@@ -1997,6 +2123,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "complementary-local-currencies-commons",
+    "kind": "commons",
     "name": "Complementary Local and Neighborhood Currencies",
     "domain": "money/finance",
     "brief": "Local and neighborhood currencies allow communities to capture and recirculate the value they generate among themselves, keeping wealth in commons circuits rather than bleeding it to distant capital markets.",
@@ -2012,6 +2139,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "rights-of-nature-self-owning-land",
+    "kind": "commons",
     "name": "Rights of Nature and Self-Owning Land",
     "domain": "land",
     "brief": "Emerging laws granting legal rights to nature and establishing 'self-owning land' with legal trustees and guardians represent a radical extension of relationalized property that removes ecosystems from commodity status.",
@@ -2027,6 +2155,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "right-to-roam-vernacular-access",
+    "kind": "commons",
     "name": "Right to Roam — Vernacular Access Rights",
     "domain": "land",
     "brief": "Expansive 'right to roam' laws in countries like the United Kingdom permit people to swim, hike, and camp on private land, instantiating use rights for the public as a form of relationalized property that limits owner absolutism.",
@@ -2042,6 +2171,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "financialization-nature-anti-pattern",
+    "kind": "anti-pattern",
     "name": "Financialization of Nature — Anti-Pattern",
     "domain": "energy",
     "brief": "Carbon offset markets, REDD, and other 'green capitalism' schemes purport to solve ecological crises by extending property rights and markets into nature, but evidence shows they fail and enable further capitalist appropriation of the commons.",
@@ -2058,6 +2188,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "martin-luther-king-estate-cultural-enclosure",
+    "kind": "enclosure",
     "name": "MLK Estate — Cultural Commons Enclosure",
     "domain": "cultural",
     "brief": "The estate of Dr. Martin Luther King Jr. treated his speeches, writings, and image as commercial properties to be licensed to corporations, exemplifying the enclosure of cultural and political commons through private copyright.",
@@ -2072,6 +2203,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "alaska-permanent-fund",
+    "kind": "commons",
     "name": "Alaska Permanent Fund",
     "domain": "money/finance",
     "brief": "A state-chartered stakeholder trust that collects a portion of oil royalties from state lands and disperses an annual dividend to every household in Alaska, bypassing legislative graft to directly benefit citizens.",
@@ -2089,6 +2221,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "open-source-seed-initiative",
+    "kind": "commons",
     "name": "Open Source Seed Initiative (OSSI)",
     "domain": "food/seed",
     "brief": "A legal hack launched by farmers and seed breeders that applies open-source licensing principles to agricultural seeds, ensuring seeds and all future derivations remain permanently available for public use and cannot be privatized through patents.",
@@ -2106,6 +2239,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "german-volunteer-fire-departments",
+    "kind": "commons",
     "name": "German Volunteer Fire Departments",
     "domain": "social/mutual_aid",
     "brief": "Over 22,000 volunteer fire departments across Germany in which state authorities provide equipment, training, and general support while community members self-organize the service, building pride, camaraderie, and locally managed emergency response.",
@@ -2122,6 +2256,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "baan-mankong-bangkok-housing",
+    "kind": "commons",
     "name": "Baan Mankong Program (Bangkok)",
     "domain": "urban",
     "brief": "A Thai government program begun in 2003 that channels flexible infrastructure subsidies and land loans directly to community cooperatives in poor urban neighborhoods, enabling shanty dwellers to devise their own housing solutions rather than receiving top-down contractor-built units.",
@@ -2139,6 +2274,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "barcelona-en-comu-citizen-asset-program",
+    "kind": "commons",
     "name": "Barcelona En Comú — Citizen Asset Program (CAP)",
     "domain": "urban",
     "brief": "After winning Barcelona's city government in 2015, Barcelona En Comú launched commons/public partnerships including the Citizen Asset Program, which uses a Social Return on Investment tool to measure citizens' commoning contributions and shift long-term building leases to grassroots groups rather than private businesses.",
@@ -2156,6 +2292,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "bologna-co-city-protocols",
+    "kind": "commons",
     "name": "Bologna Regulation for the Care and Regeneration of Urban Commons / Co-City Protocols",
     "domain": "urban",
     "brief": "A legal framework pioneered in Bologna, Italy, and developed by LabGov into the Co-City Protocols, enabling city governments to provide legal, financial, and technical support to commoner-initiated projects — including eldercare, kindergartens, public spaces, and abandoned building rehabilitation — through formalized cogovernance.",
@@ -2173,6 +2310,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "gpl-creative-commons-legal-hack",
+    "kind": "commons",
     "name": "General Public License (GPL) and Creative Commons Licenses as Legal Hacks",
     "domain": "knowledge/digital",
     "brief": "The GPL and Creative Commons licenses are landmark legal hacks that reverse copyright law's default privatization by making software and creative works legally shareable in perpetuity without permission or payment, establishing sharing as the default and enabling generative commoning at scale.",
@@ -2190,6 +2328,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "state-trustee-commons-framework",
+    "kind": "commons",
     "name": "State Trustee Commons (Framework)",
     "domain": "land",
     "brief": "A governance framework in which the state acts explicitly as trustee for commoners — not owner — of large common-pool resources such as national parks and public lands, with affirmative obligations for transparency, participation, subsidiarity, and protection from enclosure.",
@@ -2208,6 +2347,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "market-state-enclosure-of-commons",
+    "kind": "enclosure",
     "name": "Market/State Enclosure of Commoners' Resources (Anti-Pattern)",
     "domain": "land",
     "brief": "The systemic pattern by which the market/state seizes land, water, minerals, fisheries, data, software, and other resources stewarded by commoners through legally sanctioned enclosure, converting them into taxable market commodities and diminishing commoners' self-reliance and sovereignty.",
@@ -2225,6 +2365,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "sustainable-economies-law-center-coop-hacks",
+    "kind": "commons",
     "name": "Sustainable Economies Law Center — Cooperative and Commons Legal Hacks",
     "domain": "labor",
     "brief": "Attorney Janelle Orsi and colleagues at the Sustainable Economies Law Center in Oakland devised creative legal governance regimes for cooperatives, land trusts, shared housing, and digital communities, enabling social movement cooperatives, decentralized grassroots organizations, self-managed staff collectives, and permanent community ownership.",
@@ -2241,6 +2382,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "tcp-ip-commons-protocol-model",
+    "kind": "commons",
     "name": "TCP/IP Internet Protocols as Commons Infrastructure Model",
     "domain": "knowledge/digital",
     "brief": "The TCP/IP protocols that underpin the internet demonstrate how setting minimal, open technical standards — rather than top-down control — unleashes distributed creativity and allows wholly original commons-based innovations to emerge, offering a model for commons/public partnerships at scale.",
@@ -2258,6 +2400,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "us-peer-to-patent-project",
+    "kind": "commons",
     "name": "US Patent and Trademark Office — Peer to Patent Project",
     "domain": "knowledge/digital",
     "brief": "A crowdsourced commons/state collaboration in which the US Patent and Trademark Office invites citizens to submit prior art for patent applications, improving patent quality and preventing unwarranted monopolies that could inhibit future innovation.",
@@ -2273,6 +2416,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "rights-of-nature-legal-hack",
+    "kind": "commons",
     "name": "Rights of Nature and Self-Owning Land (Legal Hacks)",
     "domain": "land",
     "brief": "Legal hacks that extend rights to rivers, wildlife, and living ecosystems — and in some cases to Indigenous cultures — opening conversations and social movements that challenge the market/state worldview's treatment of nature as mere property or resource.",
@@ -2288,6 +2432,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "green-governance-macroprinciples",
+    "kind": "commons",
     "name": "Green Governance Macroprinciples for Commons-Supportive International Law",
     "domain": "land",
     "brief": "A set of macroprinciples proposed by Bollier and international law scholar Burns Weston in Green Governance (2015) to pressure states to formally recognize and support commons-based ecological governance as a legitimate alternative to market/state-driven resource management.",
@@ -2305,6 +2450,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "commons-public-partnership-framework",
+    "kind": "commons",
     "name": "Commons/Public Partnership (CPP) Framework",
     "domain": "urban",
     "brief": "An inversion of the neoliberal public/private partnership (PPP) model in which commoners and state institutions cooperate through legal structures where commoners retain general control, the state provides enabling legal/financial/administrative support, and no top-down commanding of behavior occurs.",
@@ -2322,6 +2468,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "city-repair-portland",
+    "kind": "commons",
     "name": "City Repair — Portland Neighborhood Commons",
     "domain": "urban",
     "brief": "Mark Lakeman's City Repair is an enterprising civic project dedicated to reviving neighborhood spaces in Portland, Oregon, demonstrating how small-scale urban commoning can rebuild community and public space.",
@@ -2338,6 +2485,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "arvari-river-rajendra-singh",
+    "kind": "commons",
     "name": "Arvari River Commons — Young India Association",
     "domain": "water",
     "brief": "Rajendra Singh and the Young India Association reclaimed the nearly dry Arvari River by applying commons principles, restoring a degraded waterway through community-led stewardship.",
@@ -2354,6 +2502,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "hackerspaces-fab-labs-commons",
+    "kind": "commons",
     "name": "Hackerspaces and Fab Labs — Open Hardware and Digital Commons",
     "domain": "knowledge/digital",
     "brief": "Commoners around the world have created dozens of hackerspaces and Fab Labs to co-produce software, customized fabrication, and open hardware design and manufacturing as shared knowledge commons.",
@@ -2371,6 +2520,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "crystallization-commons-growth-pattern",
+    "kind": "commons",
     "name": "Crystallization Pattern — Distributed Commons Growth",
     "domain": "social/mutual_aid",
     "brief": "Bollier, drawing on Silke Helfrich's metaphor, describes how commons grow not by linear scaling but by crystallization — new participants join as they resonate with shared structures, enabling growth in all directions without hierarchy or centralization.",
@@ -2388,6 +2538,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "parallel-polis-commons",
+    "kind": "commons",
     "name": "Parallel Polis — Commons as Emergent Alternative Governance",
     "domain": "social/mutual_aid",
     "brief": "Bollier calls for building durable new institutions of commoning — a 'parallel polis' — that can flourish within the husk of the etiolated market/state system, offering an emergent alternative governance structure for the Ecocene era.",
@@ -2406,6 +2557,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "commons-as-gift-and-duty",
+    "kind": "commons",
     "name": "Commons as Gift and Duty — Vernacular Law and Moral Foundation",
     "domain": "cultural",
     "brief": "Drawing on the Norman etymology of 'commons' from munus (gift and counter-gift/duty), Bollier argues the commons must recover a world of gifts and duties, fortifying vernacular law against the eclipsing effects of market and state centralization.",
@@ -2423,6 +2575,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "commons-definition-short-and-sweet",
+    "kind": "commons",
     "name": "The Commons, Short and Sweet",
     "domain": "social/mutual_aid",
     "brief": "A concise definitional summary of what a commons is and is not, emphasizing that a commons is a resource plus a community plus protocols — not merely a resource — and that commoning (the verb) is as essential as the commons (the noun).",
@@ -2440,6 +2593,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "enclosure-dispossession-pattern",
+    "kind": "enclosure",
     "name": "Enclosure as Dispossession",
     "domain": "land",
     "brief": "Bollier's summary framing of enclosure as the privatization and commodification of shared resources, dismantling commons-based culture and replacing it with market order — one of the great unacknowledged problems of our time.",
@@ -2457,6 +2611,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "open-networks-hosting-infrastructure",
+    "kind": "commons",
     "name": "Open Networks as Hosting Infrastructure for Commons",
     "domain": "knowledge/digital",
     "brief": "Open networks (especially the internet) are natural hosting infrastructure for commons, enabling low-cost, accessible spaces for self-governance — but commoners must take affirmative steps to protect these commons against enclosure by capital-driven platforms.",
@@ -2473,6 +2628,7 @@ export const COMMONS: Commons[] = [
   },
   {
     "id": "transnational-commons-ecological-governance",
+    "kind": "commons",
     "name": "Transnational Commons for Ecological Restoration",
     "domain": "energy",
     "brief": "Bollier's call for new transnational commons forms that can align governance with ecological realities and drive restoration across political boundaries — a gap in existing commons architecture that requires innovations in law, policy, and social practice.",

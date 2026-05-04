@@ -11,7 +11,7 @@ import {
   COMMONS, ENCLOSURES, STRATEGIES,
   OSTROM_PRINCIPLES, GLOSSARY, QUOTES,
 } from './data/index.js';
-import { isAntiPattern } from './types.js';
+import { isCommons } from './types.js';
 
 function createServer(): McpServer {
   const server = new McpServer({
@@ -224,7 +224,7 @@ function createServer(): McpServer {
   }, async ({ domain, scale, what_stewarded }) => {
     const dKey = domain.toLowerCase();
     const candidates = COMMONS.filter(c =>
-      !isAntiPattern(c) &&
+      isCommons(c) &&
       (c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase()))
     );
 
@@ -322,7 +322,7 @@ function createServer(): McpServer {
   }, async ({ domain, what_stewarded, scale }) => {
     const dKey = domain.toLowerCase();
     const wKey = what_stewarded.toLowerCase();
-    const scored = COMMONS.filter(c => !isAntiPattern(c)).map(c => {
+    const scored = COMMONS.filter(isCommons).map(c => {
       let score = 0;
       if (c.domain.toLowerCase().includes(dKey) || dKey.includes(c.domain.toLowerCase())) score += 3;
       const blob = `${c.brief} ${c.care_wealth}`.toLowerCase();
