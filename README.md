@@ -55,6 +55,25 @@ Then restart your Claude Code session and check `claude mcp list` — you should
 
 ---
 
+## What's in the catalog
+
+Bollier's tripartite definition of a commons — *community + care-wealth + protocols* — shapes the data:
+
+- **Commons cases** — exemplary commons (Wikipedia, Spanish huerta, makerspaces, Erakulapally seed-sharing, etc.), plus specific historical enclosure events and broader anti-patterns. Each entry names its **community** (who stewards it), its **care-wealth** (what's stewarded), and 2–5 **protocols** — concrete imperative rules with MUST / SHOULD / MUST NOT modal markers, drawn directly from Bollier's framing. The protocols are what distinguish a commons from open-access.
+- **Enclosure patterns** — recognition heuristics for how shared wealth gets captured (commons-washing, financialization-of-nature, market/state duopoly, etc.) with response strategies cross-referenced.
+- **Strategies** — named commoning moves that counter enclosures (parallel polis, vernacular law, decommodification, federated commons, etc.).
+- **Ostrom's 8 design principles** — Elinor Ostrom's empirical rubric for evaluating commons durability, with 3–5 diagnostic questions per principle.
+- **Glossary** — Bollier's vocabulary (OntoShift, commoning, care-wealth, vernacular law, etc.).
+- **Quotes** — verbatim passages indexed by theme, with full attribution to Bollier built into every response that surfaces them (per the CC BY-NC-SA license).
+
+Example of what a "protocol" looks like — from the Wikipedia entry:
+
+> - "Content MUST remain openly accessible and freely editable by volunteers under open licensing"
+> - "Governance SHOULD be democratic and community-driven rather than corporate or state-controlled"
+> - "The platform MUST NOT be operated for profit or under investor-driven governance"
+
+---
+
 ## What you can ask it to do
 
 You don't call the tools directly. You talk to Claude in plain English, and Claude decides which tools to use. Two common starting points:
