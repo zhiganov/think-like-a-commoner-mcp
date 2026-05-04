@@ -72,6 +72,13 @@ Catalogs are extracted from the source markdown via `npm run extract` (requires 
 
 Smoke tests live in `scripts/`: `smoke-fixes.mjs` runs against a local stdio build (`npm run build && node scripts/smoke-fixes.mjs`) for regression coverage; `smoke-fixes-prod.mjs` hits the Railway HTTP transport for post-deploy verification.
 
+Catalog provenance: `docs/archive/` preserves entries that have been merged into siblings during dedup passes — the active catalog stays compact while authored content remains recoverable. See the in-file preamble for each archive batch.
+
 ## Related
 
-Sibling commons-themed MCPs in development: Plurality (Weyl & Tang), Governable Spaces (Schneider). All under the [book-power](https://github.com/zhiganov/book-power) umbrella.
+Sibling MCPs under the [book-power](https://github.com/zhiganov/book-power) umbrella:
+
+- [jtbd-knowledge-mcp](https://github.com/zhiganov/jtbd-knowledge-mcp) — JTBD framing combining Moesta + Kalbach (shipped)
+- [facilitating-deliberation-mcp](https://github.com/Open-Facilitation-Library/facilitating-deliberation-mcp) — facilitator's reference (MosaicLab, 2022) (shipped)
+- Plurality (Weyl & Tang) — queued
+- Governable Spaces (Schneider) — queued
