@@ -1,4 +1,17 @@
 // scripts/extract-data.ts
+//
+// Synced from book-power/templates/mcp-server-handcrafted/extract-data.template.ts
+// (canonical source per book-power/CLAUDE.md "Preferred extraction approach").
+//
+// When updating the structural sections (per-chapter sequential extraction with
+// ids_so_far passthrough, post-extraction semantic dedup pass, prompt caching,
+// cache machinery), update the template FIRST and re-sync this file from there.
+// Book-specific bits (SOURCE path, DOMAINS enum, TOOLS map, system prompt
+// content, Ostrom-targeted extraction) are unique to this MCP and do not
+// propagate back to the template.
+//
+// Last sync from template: 2026-05-04 (book-power#22 / TLAC#7).
+
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
