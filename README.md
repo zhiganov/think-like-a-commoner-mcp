@@ -25,7 +25,7 @@ Add to your Claude Desktop / Claude Code MCP config:
 {
   "mcpServers": {
     "think-like-a-commoner": {
-      "url": "https://think-like-a-commoner-mcp-production.up.railway.app/mcp",
+      "url": "https://think-like-a-commoner-mcp-production-f90f.up.railway.app/mcp",
       "transport": "http"
     }
   }
