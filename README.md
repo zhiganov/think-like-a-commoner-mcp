@@ -25,14 +25,14 @@ Add to your Claude Desktop / Claude Code MCP config:
 {
   "mcpServers": {
     "think-like-a-commoner": {
-      "url": "https://think-like-a-commoner-mcp-production.up.railway.app/mcp",
+      "url": "https://tlac-book-mcp-production.up.railway.app/mcp",
       "transport": "http"
     }
   }
 }
 ```
 
-(Update the URL with the actual deploy URL from Railway after Task 12.)
+The Railway deploy is public, no auth, and does not require an API key.
 
 ## Use it (local)
 
