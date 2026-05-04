@@ -78,7 +78,7 @@ Catalog provenance: `docs/archive/` preserves entries that have been merged into
 
 Sibling MCPs under the [book-power](https://github.com/zhiganov/book-power) umbrella:
 
-- [jtbd-knowledge-mcp](https://github.com/zhiganov/jtbd-knowledge-mcp) — JTBD framing combining Moesta + Kalbach (shipped)
-- [facilitating-deliberation-mcp](https://github.com/Open-Facilitation-Library/facilitating-deliberation-mcp) — facilitator's reference (MosaicLab, 2022) (shipped)
-- Plurality (Weyl & Tang) — queued
+- jtbd-knowledge-mcp — JTBD framing combining Moesta + Kalbach (shipped, private — copyrighted source)
+- facilitating-deliberation-mcp — MosaicLab's facilitator reference (shipped, private — copyrighted source)
+- Plurality (Weyl & Tang) — queued, will be public (CC0 source)
 - Governable Spaces (Schneider) — queued
