@@ -12,7 +12,6 @@ const CACHE_DIR = join(ROOT, '.extraction-cache');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 const MODEL = 'claude-sonnet-4-6';
-const CONCURRENCY = 4;
 
 type Catalog =
   | 'commons' | 'enclosures' | 'strategies'
@@ -65,6 +64,34 @@ DOMAIN ENUM (use exactly one per entry)
 
 If something fits multiple domains, pick the most central one for that case.
 
+INCLUSION CRITERIA (decide what's worth a distinct entry)
+
+- **Commons:** a *named, distinct* commons (or candidate commons) — must have community + care-wealth + protocols. Do NOT extract: generic patterns described abstractly without a community ("the principle of stewardship"); sub-aspects of a commons that share community + care-wealth + protocols with their parent (do NOT split CSA farms by region; do NOT create separate "X as relationalized property" + "X as relationalized finance" entries for the same X); conceptual moves Bollier describes (those go in glossary, not commons).
+- **Enclosures:** a *recognized pattern* of how shared wealth gets captured. Do NOT extract specific instances when the pattern they exemplify is already in the catalog — one entry per pattern, not per instance. The "market/state duopoly" framing is ONE pattern, not five.
+- **Strategies:** a *named commoning move* with a clear practitioner action. Do NOT extract defensive applications of one strategy across many domains as separate strategies — "defend net neutrality", "defend academic commons", "defend cultural commons" are all the same strategy (defensive litigation/advocacy), one entry. Same for "vernacular law as informal governance" / "as living commons law" / "as legal hacks" — one entry.
+- **Glossary:** a *Bollier-coined or Bollier-emphasized* term, named explicitly in the book as a defined concept. Do NOT extract standard English nouns or phrases that aren't actual technical vocabulary.
+- **Quotes:** a *strong, citation-worthy passage* on a distinct theme. Do NOT extract more than 3-5 quotes per chapter; aim for thematic coverage, not exhaustive.
+
+TARGET SIZES (across the whole book — soft hints, not caps)
+
+- commons: ~50 distinct cases
+- enclosures: ~15 distinct patterns
+- strategies: ~10 distinct moves
+- ostrom: exactly 8 (Bollier explicitly enumerates them in Ch. 2)
+- glossary: ~30-40 distinct terms
+- quotes: ~30-60 distinct passages
+
+If you find yourself extracting much more than these targets in a single chapter, you are likely splitting one concept across multiple slugs. Re-evaluate before emitting.
+
+ENTRY KIND DISCRIMINATOR (commons catalog only)
+
+Each commons entry MUST include a \`kind\` field:
+- "commons" — exemplary cases to learn from (Wikipedia, Spanish huerta, makerspaces, Erakulapally seed-sharing). The default if Bollier holds the entry up positively.
+- "enclosure" — a specific historical or contemporary enclosure event/case Bollier documents in the commons context (Microsoft OS, MLK estate copyright, Bayh-Dole, English Enclosure Movement). Use for entries that name a *specific* captured-commons rather than the *pattern* of capture (the latter belongs in the enclosures catalog).
+- "anti-pattern" — broader cautionary concepts/framings (commons-washing, homo economicus, tragedy myth, financialization-of-nature). Use for conceptual warnings rather than specific events.
+
+If you're tagging something as "enclosure" or "anti-pattern" in the commons catalog, ALSO consider whether it belongs in the enclosures catalog instead. Most enclosure-kind entries in commons.ts are there because Bollier specifically frames them as "captured commons" — keep that framing.
+
 OUTPUT
 You must call the provided tool with structured arguments. Do not narrate, do not output prose. If a chapter has no entries that fit the schema, call the tool with an empty array.`;
 
@@ -90,6 +117,7 @@ const TOOLS: Record<Catalog, ToolSchema> = {
       properties: {
         id: { type: 'string', description: 'kebab-case stable ID' },
         name: { type: 'string' },
+        kind: { type: 'string', enum: ['commons', 'enclosure', 'anti-pattern'], description: 'Discriminator per the ENTRY KIND section of the system prompt. "commons" = exemplary case; "enclosure" = specific captured-commons event; "anti-pattern" = cautionary concept/framing.' },
         domain: { type: 'string', enum: [...DOMAINS] },
         brief: { type: 'string', description: '1-2 sentence description' },
         community: { type: 'string', description: 'Who stewards it' },
@@ -98,7 +126,7 @@ const TOOLS: Record<Catalog, ToolSchema> = {
         source_chapter: { type: 'string' },
         source_quote: { type: 'string', description: 'Optional verbatim grounding passage, ≤200 words' },
       },
-      required: ['id', 'name', 'domain', 'brief', 'community', 'care_wealth', 'protocols', 'source_chapter'],
+      required: ['id', 'name', 'kind', 'domain', 'brief', 'community', 'care_wealth', 'protocols', 'source_chapter'],
     }),
   },
   enclosures: {
@@ -257,7 +285,8 @@ async function callExtraction(
 
 async function extractChapter(
   catalog: Catalog,
-  chunk: { chapterLabel: string; text: string }
+  chunk: { chapterLabel: string; text: string },
+  idsSoFar: string[]
 ): Promise<any[]> {
   const cachePath = join(CACHE_DIR, catalog, `${slugify(chunk.chapterLabel)}.json`);
 
@@ -266,12 +295,21 @@ async function extractChapter(
     return JSON.parse(readFileSync(cachePath, 'utf-8'));
   }
 
+  const idsContext = idsSoFar.length > 0
+    ? `
+
+ALREADY EXTRACTED FROM PRIOR CHAPTERS (DO NOT RE-EMIT THESE IDs):
+${idsSoFar.join(', ')}
+
+If this chapter expands on one of those concepts, leave its slug alone — the dedup pass will fold any new context in. Do NOT invent a new slug ("foo-as-relationalized-finance", "foo-north-america") for the same concept under a slightly different framing.`
+    : '';
+
   const userContent = `CHAPTER: ${chunk.chapterLabel}
 
 CONTENT:
 ${chunk.text}
 
-Extract every entry from this chapter that fits the tool schema. If no entries fit, call the tool with entries: [].`;
+Extract every entry from this chapter that fits the tool schema. If no entries fit, call the tool with entries: [].${idsContext}`;
 
   const entries = await callExtraction(TOOLS[catalog], userContent);
 
@@ -280,20 +318,12 @@ Extract every entry from this chapter that fits the tool schema. If no entries f
   return entries;
 }
 
-async function processConcurrent<T, R>(items: T[], concurrency: number, worker: (item: T) => Promise<R>): Promise<R[]> {
-  const results: R[] = new Array(items.length);
-  let i = 0;
-  async function next(): Promise<void> {
-    while (true) {
-      const idx = i++;
-      if (idx >= items.length) return;
-      results[idx] = await worker(items[idx]);
-    }
-  }
-  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, () => next()));
-  return results;
-}
-
+// Per-catalog extraction is sequential (not concurrent) so each chapter call
+// can see the ids extracted from earlier chapters and avoid coining a new slug
+// for an already-named concept. This is the load-bearing fix from book-power#22:
+// without ids_so_far passthrough, the model independently re-coins slugs across
+// chapters and the post-pass dedup has to clean up. Sequential is ~4x slower
+// wall time but the system prompt + tool schema stay cached so cost is unchanged.
 async function extractCatalog(
   catalog: Catalog,
   chunks: { chapterLabel: string; text: string; isPartDivider: boolean }[]
@@ -301,30 +331,173 @@ async function extractCatalog(
   console.log(`\n=== Extracting ${catalog} ===`);
 
   const eligible = chunks.filter(c => !(SKIP_PART_DIVIDERS.has(catalog) && c.isPartDivider));
-  console.log(`  ${eligible.length} chapters to process (concurrency=${CONCURRENCY})`);
+  console.log(`  ${eligible.length} chapters to process (sequential — ids_so_far passed forward)`);
 
-  let done = 0;
-  const perChapter = await processConcurrent(eligible, CONCURRENCY, async (chunk) => {
-    const entries = await extractChapter(catalog, chunk);
-    done++;
-    process.stdout.write(`  [${done}/${eligible.length}] ${chunk.chapterLabel}: +${entries.length}\n`);
-    return entries;
-  });
-
-  // Flatten + dedupe by ID/term
+  const idsSoFar: string[] = [];
   const all: any[] = [];
-  const seen = new Set<string>();
-  for (const arr of perChapter) {
-    for (const e of arr) {
+
+  for (let i = 0; i < eligible.length; i++) {
+    const chunk = eligible[i];
+    const entries = await extractChapter(catalog, chunk, idsSoFar);
+    process.stdout.write(`  [${i + 1}/${eligible.length}] ${chunk.chapterLabel}: +${entries.length}\n`);
+
+    // Track ids; string-equal dedup happens here too in case the model still
+    // emits the same id twice across chapters despite ids_so_far guidance.
+    for (const e of entries) {
       const key = e.id ?? e.term ?? `${e.number ?? ''}-${e.name ?? ''}` as string;
-      if (!seen.has(key)) {
-        seen.add(key);
+      if (!idsSoFar.includes(key)) {
+        idsSoFar.push(key);
         all.push(e);
       }
     }
   }
-  console.log(`  Total ${catalog}: ${all.length}`);
+  console.log(`  Total ${catalog}: ${all.length} (after string-equal dedup)`);
   return all;
+}
+
+// Catalogs eligible for the post-extraction semantic dedup pass. Excluded:
+// - ostrom: fixed cardinality (8 principles), targeted extraction handles dedup natively
+const DEDUP_CATALOGS: Set<Catalog> = new Set(['commons', 'enclosures', 'strategies', 'glossary', 'quotes']);
+
+const DEDUP_TOOL: ToolSchema = {
+  name: 'propose_merges',
+  description: 'Propose semantic dedup merges for the catalog. Each merge picks one canonical id (keep) and lists the others to fold into it (drop).',
+  input_schema: {
+    type: 'object',
+    properties: {
+      merges: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            keep: { type: 'string', description: 'The canonical id to keep' },
+            drop: { type: 'array', items: { type: 'string' }, description: 'Slugs to fold into keep — same concept under different framings/regions/sub-aspects' },
+            reason: { type: 'string', description: 'One sentence: what concept these all describe' },
+          },
+          required: ['keep', 'drop', 'reason'],
+        },
+      },
+    },
+    required: ['merges'],
+  },
+};
+
+// Post-extraction semantic dedup pass: given the full catalog, ask Sonnet to
+// surface groups of semantic duplicates that survived the per-chapter
+// ids_so_far passthrough. Apply by unioning protocols (where applicable) and
+// dropping the merged-out entries.
+async function dedupCatalog(catalog: Catalog, entries: any[]): Promise<any[]> {
+  if (entries.length < 10) {
+    console.log(`  [dedup] ${catalog}: ${entries.length} entries, skipping (too few)`);
+    return entries;
+  }
+
+  console.log(`\n=== Deduping ${catalog} (${entries.length} entries) ===`);
+
+  const cachePath = join(CACHE_DIR, catalog, '_dedup.json');
+  let merges: Array<{ keep: string; drop: string[]; reason: string }>;
+
+  if (existsSync(cachePath)) {
+    merges = JSON.parse(readFileSync(cachePath, 'utf-8'));
+    console.log(`  cache hit (${merges.length} merges proposed)`);
+  } else {
+    const summaries = entries.map(e => {
+      const id = e.id ?? e.term ?? `${e.number ?? ''}-${e.name ?? ''}`;
+      const blurb = (e.brief ?? e.description ?? e.definition ?? e.text ?? e.signature ?? '').slice(0, 140).replace(/\s+/g, ' ');
+      return `${id} | ${e.name ?? e.term ?? id} | ${blurb}`;
+    }).join('\n');
+
+    const userContent = `Below is a flat list of all "${catalog}" entries extracted from David Bollier's *Think Like a Commoner* (2nd ed.), one per line: id | name | brief.
+
+Identify groups of semantically duplicate entries — same concept under different slugs, framings, regions, or sub-aspects. For each group:
+- Pick the cleanest/canonical id as the primary ("keep")
+- List the other ids to merge into it ("drop")
+- One-sentence reason naming what concept the group all describe
+
+ONLY merge entries that genuinely describe the same concept. Common examples to merge:
+- Same case under different names ("wikipedia-knowledge-commons" + "wikipedia-digital-knowledge-commons")
+- Same concept under different framings ("X-as-relationalized-property" + "X" + "X-as-relationalized-finance")
+- Sub-aspect entries that overlap fully with a parent entry
+- "(Concept)" + "(Framework)" pairs
+
+DO NOT merge entries that describe distinct cases, even if they share a name pattern:
+- Different geographic instances of the same model (Bangla-Pesa vs BerkShares are both local currencies but distinct cases — keep both)
+- Different sub-spheres Bollier deliberately distinguishes (Triad of Commoning's three spheres are intentional, not duplicates)
+
+If no duplicates are present, return an empty merges array. Don't force merges to look productive.
+
+Entries:
+${summaries}`;
+
+    const response = await client.messages.create({
+      model: MODEL,
+      max_tokens: 8000,
+      system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } } as any],
+      tools: [{ ...DEDUP_TOOL, cache_control: { type: 'ephemeral' } } as any],
+      tool_choice: { type: 'tool', name: DEDUP_TOOL.name },
+      messages: [{ role: 'user', content: userContent }],
+    });
+
+    const toolUse = response.content.find((b: any) => b.type === 'tool_use');
+    if (!toolUse || toolUse.type !== 'tool_use') {
+      console.warn(`  [dedup] ${catalog}: no tool_use in response, skipping`);
+      return entries;
+    }
+    merges = (toolUse.input as { merges?: any[] }).merges ?? [];
+
+    mkdirSync(join(CACHE_DIR, catalog), { recursive: true });
+    writeFileSync(cachePath, JSON.stringify(merges, null, 2));
+  }
+
+  if (merges.length === 0) {
+    console.log(`  no merges proposed`);
+    return entries;
+  }
+
+  // Apply: union protocols (where applicable), drop merged entries
+  const dropSet = new Set<string>();
+  const protoUnions = new Map<string, string[]>();
+
+  const idOf = (e: any): string => e.id ?? e.term ?? `${e.number ?? ''}-${e.name ?? ''}`;
+  const byId = new Map<string, any>(entries.map(e => [idOf(e), e]));
+
+  for (const m of merges) {
+    const kept = byId.get(m.keep);
+    if (!kept) {
+      console.warn(`  WARNING: keep "${m.keep}" not in catalog — skipping`);
+      continue;
+    }
+
+    if (Array.isArray(kept.protocols)) {
+      const union = [...kept.protocols];
+      const seen = new Set(union);
+      for (const dropId of m.drop) {
+        const dropped = byId.get(dropId);
+        if (!dropped) continue;
+        for (const p of (dropped.protocols ?? [])) {
+          if (!seen.has(p)) {
+            union.push(p);
+            seen.add(p);
+          }
+        }
+      }
+      if (union.length > kept.protocols.length) {
+        protoUnions.set(m.keep, union);
+      }
+    }
+
+    for (const dropId of m.drop) {
+      if (byId.has(dropId)) dropSet.add(dropId);
+    }
+    console.log(`  merge: ${m.keep} ← ${m.drop.join(', ')}`);
+  }
+
+  const final = entries
+    .filter(e => !dropSet.has(idOf(e)))
+    .map(e => protoUnions.has(idOf(e)) ? { ...e, protocols: protoUnions.get(idOf(e)) } : e);
+
+  console.log(`  After dedup: ${final.length} (was ${entries.length}, -${entries.length - final.length})`);
+  return final;
 }
 
 // Special case: Ostrom's 8 principles live almost entirely in Ch. 2 (with Ch. 1 setup).
@@ -385,6 +558,9 @@ async function main() {
 
   for (const cat of heavyCatalogs) {
     results[cat] = await extractCatalog(cat, chunks);
+    if (DEDUP_CATALOGS.has(cat)) {
+      results[cat] = await dedupCatalog(cat, results[cat]);
+    }
   }
   results.ostrom = await extractOstromTargeted(chunks);
 
