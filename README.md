@@ -179,7 +179,7 @@ Catalog provenance: `docs/archive/` preserves entries that have been merged into
 
 Sibling MCPs under the [book-power](https://github.com/zhiganov/book-power) umbrella:
 
+- [governable-spaces-mcp](https://github.com/zhiganov/governable-spaces-mcp) — Schneider's *Governable Spaces* on democratic design for online life (shipped, public, CC BY-NC-SA)
 - jtbd-knowledge-mcp — JTBD framing combining Moesta + Kalbach (shipped, private — copyrighted source)
 - facilitating-deliberation-mcp — MosaicLab's facilitator reference (shipped, private — copyrighted source)
 - Plurality (Weyl & Tang) — queued, will be public (CC0 source)
-- Governable Spaces (Schneider) — queued
