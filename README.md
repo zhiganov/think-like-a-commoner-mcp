@@ -1,6 +1,6 @@
 # Think Like a Commoner — MCP Server
 
-An MCP server embedding David Bollier's commons framing from *Think Like a Commoner: A Short Introduction to the Life of the Commons* (2nd edition, 2024).
+An unofficial MCP server embedding David Bollier's commons framing from *Think Like a Commoner: A Short Introduction to the Life of the Commons* (2nd edition, 2024).
 
 > Built for: commons stewards, organizers, and movement strategists. Use it inside Claude Desktop, Claude Code, or any MCP-compatible client to apply Bollier's framing to a real situation — name an enclosure, find precedent commons, design social protocols, or reframe a market-mind problem.
 
