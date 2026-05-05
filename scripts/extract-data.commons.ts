@@ -41,6 +41,8 @@ import { fileURLToPath } from 'node:url';
 import {
   type ToolSchema,
   type ExtractConfig,
+  type DisciplineName,
+  DISCIPLINES,
   entriesArray,
   chapterChunks,
   callTool,
@@ -61,6 +63,15 @@ const MODEL = 'claude-sonnet-4-6';
 
 // === COMMONS-DOMAIN CONFIG ===
 // Reusable across any commons-themed book.
+
+// Discipline: Bollier's commons framing IS prescriptive — Ostrom's design
+// principles are explicitly rule-shaped ("a commons MUST have boundaries"),
+// and Bollier's protocols read as imperative norms. Modal markers track what
+// the author actually argues. Do NOT change to 'descriptive' for commons-
+// themed books without re-running extraction; the catalog shape (`protocols`
+// field, MUST-coded Ostrom diagnostic questions) assumes prescriptive voice.
+const DISCIPLINE: DisciplineName = 'prescriptive';
+const D = DISCIPLINES[DISCIPLINE];
 
 type Catalog =
   | 'commons' | 'enclosures' | 'strategies'
@@ -88,13 +99,7 @@ EXTRACTION DISCIPLINE
 - For source_chapter, use short forms: "Preface", "Introduction", "Ch. 1", "Ch. 2", ... "Conclusion", "Tools Appendix", or for Part dividers "Part I", "Part II", "Part III".
 - Quote sparingly. Source quotes must be ≤200 words and verbatim. Skip the source_quote field if no especially strong passage applies.
 
-MODAL MARKERS
-Use MUST / SHOULD / MUST NOT in protocol descriptions, strategy descriptions, and Ostrom diagnostic questions when Bollier states:
-- A hard rule (e.g., "a commons MUST have boundaries, rules, social norms, and sanctions" — Ch. 2)
-- A strong default (e.g., "monitoring SHOULD be done by community members, not external authorities")
-- An explicit anti-pattern (e.g., "a commons MUST NOT be confused with open-access — that is Hardin's mistake")
-
-Forces specificity. Don't waffle.
+${D.systemPromptSection}
 
 ANTI-PATTERN SURFACING
 Bollier names many anti-patterns: commons-washing, financialization-of-nature, neo-extractivism, market/state duopoly, "tragedy of unmanaged open access" misnamed as commons. When extracting Enclosures, surface at least one anti-pattern callout in the signature field.
@@ -158,7 +163,7 @@ const TOOLS: Record<Catalog, ToolSchema> = {
         brief: { type: 'string', description: '1-2 sentence description' },
         community: { type: 'string', description: 'Who stewards it' },
         care_wealth: { type: 'string', description: 'What is stewarded' },
-        protocols: { type: 'array', items: { type: 'string' }, description: '2-5 social rules / norms / practices, with MUST/SHOULD where Bollier is prescriptive' },
+        protocols: { type: 'array', items: { type: 'string' }, description: `2-5 social rules / norms / practices, ${D.fieldHint}` },
         source_chapter: { type: 'string' },
         source_quote: { type: 'string', description: 'Optional verbatim grounding passage, ≤200 words' },
       },
@@ -194,7 +199,7 @@ const TOOLS: Record<Catalog, ToolSchema> = {
       properties: {
         id: { type: 'string' },
         name: { type: 'string' },
-        description: { type: 'string', description: '2-4 sentences with MUST/SHOULD where Bollier is prescriptive' },
+        description: { type: 'string', description: `2-4 sentences ${D.fieldHint}` },
         problem_enclosure_ids: { type: 'array', items: { type: 'string' }, description: 'IDs of enclosures this strategy counters' },
         example_commons_ids: { type: 'array', items: { type: 'string' }, description: 'IDs of commons that exemplify this strategy' },
         source_chapter: { type: 'string' },
@@ -211,7 +216,7 @@ const TOOLS: Record<Catalog, ToolSchema> = {
         number: { type: 'integer', enum: [1, 2, 3, 4, 5, 6, 7, 8] },
         name: { type: 'string' },
         description: { type: 'string' },
-        diagnostic_questions: { type: 'array', items: { type: 'string' }, description: '3-5 yes/no or short-answer questions to assess whether a commons embodies this principle. Use MUST where Bollier/Ostrom is prescriptive.' },
+        diagnostic_questions: { type: 'array', items: { type: 'string' }, description: `3-5 yes/no or short-answer questions to assess whether a commons embodies this principle. ${D.fieldHint}.` },
         example_commons_ids: { type: 'array', items: { type: 'string' } },
       },
       required: ['number', 'name', 'description', 'diagnostic_questions', 'example_commons_ids'],
